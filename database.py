@@ -2,6 +2,8 @@
 import mysql.connector
 import sys
 from getConfigFile import get_ConfigFile
+import time
+import datetime
 
 # env = get_ConfigFile(sys.argv[0]+'.env', 'production')
 env = get_ConfigFile('webservice.py'+'.env', 'production')
@@ -41,16 +43,29 @@ def registerClient(name, number):
 
     query = "insert into clients (name, celnumber) values ('%s', '%s')"%(str(name), str(number))
 
+
     insertData(query)
 
     return None
 
-# def startChat(name):
-#     query = "insert into chat (name, start_date, cel_number) values ('%s', '%s')"%(str(name), str(xxxxxx), str(number))
+def startChat(number):
 
-#     return None
+    ts = time.time()
+    timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
-# def insertHistory(name, number):
-#     query = "insert into clienxts (name, celnumber) values ('%s', '%s')"%(str(name), str(number))
+    query = "insert into chat (start_date, cel_number) values ('%s', '%s')"%(str(timestamp), str(number))
 
-#     return None
+    insertData(query)
+
+    return None
+
+def insertHistory(number, msg):
+    ts = time.time()
+    timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+
+    prequery = "select id from chat where cel_number = %s and end_date is null"
+    chat_id = fetchData(number)
+
+    query = "insert into msg_history (celnumber) values ('%s', '%s')"%(str(number), str(number))
+
+    return None

@@ -48,15 +48,18 @@ def readMsg(data):
         database.registerClient(name, number)
 
         sendMsg("Olá, agora seu número está registrado em nosso sistema. \
-            \nSou o BOT, e vou te ajudar com as compras hoje. Espero que você esteja em um bom dia <3 \
+            \nSou o VOX, e vou te ajudar com as compras hoje. Espero que você esteja em um bom dia <3 \
             \nPrecisando de informações sobre algum produto? Me fala o nome dele que eu procuro aqui rapidinho")
+        database.startChat(number)
+        database.insertHistory(number, message)
 
     else:
+        # sendMsg("Você já sabe a marca que gostaria de consultar?\n Ou prefere ouvir as recomendações mesmo?")
+
         response = parser_paodeacucar.searchProduct(message)
         print(response)
-        sendMsg(str(response))
-        # database.startChat(name, number)
-        # database.insertHistory(name, number)
+        # sendMsg(str(response))
+        # database.insertHistory(number, )
 
     # if database.chatIsOpen(number):
     
