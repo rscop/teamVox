@@ -3,6 +3,7 @@ import json
 import requests
 from getConfigFile import get_ConfigFile
 import database
+import parser_paodeacucar
 import sys
 
 env = get_ConfigFile(sys.argv[0]+'.env', 'production')
@@ -42,10 +43,23 @@ def readMsg(data):
     # if isClient(number):
 
     if database.isClient(number) == '[]':
-        print('Ainda não é cliente, registrar')
+        print('Cliente ainda não registrado, registrando...')
+
         database.registerClient(name, number)
+
+        sendMsg("Olá, agora seu número está registrado em nosso sistema. \
+            \nSou o BOT, e vou te ajudar com as compras hoje. Espero que você esteja em um bom dia <3 \
+            \nPrecisando de informações sobre algum produto? Me fala o nome dele que eu procuro aqui rapidinho")
+
     else:
-        print('Já é cliente, seguir com validações')
+        response = parser_paodeacucar.searchProduct(message)
+        print(response)
+        sendMsg(str(response))
+        # database.startChat(name, number)
+        # database.insertHistory(name, number)
+
+    # if database.chatIsOpen(number):
+    
 
     return None
 

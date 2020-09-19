@@ -44,3 +44,13 @@ def registerClient(name, number):
     insertData(query)
 
     return None
+
+# def startChat(name):
+#     query = "insert into chat (name, start_date, cel_number) values ('%s', '%s')"%(str(name), str(xxxxxx), str(number))
+
+#     return None
+
+# def insertHistory(name, number):
+#     query = "insert into clienxts (name, celnumber) values ('%s', '%s')"%(str(name), str(number))
+
+#     return None
