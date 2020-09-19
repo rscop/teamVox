@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 import json
 import requests
 from getConfigFile import get_ConfigFile
@@ -54,15 +55,46 @@ def readMsg(data):
         database.insertHistory(number, message)
 
     else:
+
+        if database.chatIsOpen(number):
+
+            database.insertHistory(number, message)
+
+            # todo - Validações fluxograma
+            # if (is mostra lista atual)
+
+            # elifl (add to lista)
+
+            # elif (consulta lista)
+
+            # else:
+
+            actualMsg = "Você já sabe a marca que gostaria de consultar?\n Ou prefere ouvir as recomendações mesmo?"
+
+            sendMsg(actualMsg)
+
+            database.insertHistory(number, actualMsg)
+
+            return None
+
+        else:
+
+            database.startChat(number)
+
+            database.insertHistory(number, message)
+
+            actualMsg = "Oi de novo, ficou muito feliz em poder te ajudar em mais um dia.\nO que você precisa hoje?"
+
+            sendMsg(actualMsg)
+
+            database.insertHistory(number, actualMsg)
+
+            return None
+
         # sendMsg("Você já sabe a marca que gostaria de consultar?\n Ou prefere ouvir as recomendações mesmo?")
 
         response = parser_paodeacucar.searchProduct(message)
-        print(response)
-        # sendMsg(str(response))
-        # database.insertHistory(number, )
-
-    # if database.chatIsOpen(number):
-    
+        print(response)    
 
     return None
 
