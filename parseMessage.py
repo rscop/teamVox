@@ -9,7 +9,7 @@ import sys
 import difflib
 import unidecode
 
-# env = get_ConfigFile(sys.argv[0]+'.env', 'production')
+env = get_ConfigFile(sys.argv[0]+'.env', 'production')
 
 def sendMsg(response, number):
 
