@@ -179,7 +179,7 @@ def readMsg(data):
                     
                     selectedItem = selectItemByNumber(message)
                     
-                    if not selectedItem or selectedItem > len(lastSearch):
+                    if not selectedItem or int(selectedItem) > len(lastSearch):
                         msg = "Eu não consegui entender o item que você quer consultar, pode repetir o número dele pra mim, por favor?"
 
                         sendMsg(msg, number)
@@ -210,7 +210,7 @@ def readMsg(data):
 
                 print('len(lastSearch): %s'%len(lastSearch))
 
-                if not selectedItem or selectedItem > len(lastSearch):
+                if not selectedItem or int(selectedItem) > len(lastSearch):
                     msg = "Eu não consegui entender o item que você quer consultar, pode repetir o número dele pra mim, por favor?"
 
                     sendMsg(msg, number)
