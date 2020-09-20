@@ -100,6 +100,8 @@ def readMsg(data):
 
                 listaProdutos = search[0]
 
+                database.insertSearch(number, listaProdutos)
+
                 actualLista = search[1]
 
                 msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
@@ -133,6 +135,8 @@ def readMsg(data):
 
                     listaProdutos = search[0]
 
+                    database.insertSearch(number, listaProdutos)
+
                     actualLista = search[1]
 
                     msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
@@ -145,7 +149,7 @@ def readMsg(data):
                     database.insertHistory(number, msg, 3)
                 
                 # elif countInfo >= countLista:
-                    #Informações sobre o produto
+                    
                 # else:
                     #Adicionar na lista
 
