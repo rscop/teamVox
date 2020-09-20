@@ -11,7 +11,7 @@ env = get_ConfigFile('webservice.py'+'.env', 'production')
 dbConn = mysql.connector.connect(
     host=env["DB_URL"],
     user=env["DB_USER"],
-    password=env["DB_PASSWORD"],
+    password=env["DB_PASS"],
     database=env["DB_NAME"]
 )
 cursor = dbConn.cursor()
