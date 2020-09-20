@@ -59,6 +59,17 @@ def startChat(number):
 
     return None
 
+def endChat(number):
+
+    ts = time.time()
+    timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+
+    query = "update chat set (end_date) values ('%s') where cel_number = %s"%(timestamp, number)
+
+    insertData(query)
+
+    return None
+
 def insertHistory(number, msg, msg_id):
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
@@ -178,12 +189,3 @@ def insertSearchItem(number, msg):
     insertData(query)
 
     return None
-
-# insertSearch('5521999984171', '{"1": {"Nome": "Alface", "Valor": "25"}, "2": {"Nome": "Tomate", "Valor": "58"} }')
-
-# chatIsOpen('5521999984171')
-
-# insertHistory('5521999984171', 'teeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgs teeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgs \
-#     teeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgs teeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgs \
-#         teeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgs teeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgs teeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgsteeeeeeeeeeste de msgs \
-#             ausdhasda\n iasuhdiuashdiuashd\naushduahsd\znaushdiuashduiha\niaushdiuashduiasdh')

@@ -9,7 +9,7 @@ import sys
 import difflib
 import unidecode
 
-env = get_ConfigFile(sys.argv[0]+'.env', 'production')
+# env = get_ConfigFile(sys.argv[0]+'.env', 'production')
 
 def sendMsg(response, number):
 
@@ -95,6 +95,17 @@ def insertOnList(number, lastitem):
     database.insertOnList(number, product)
 
     return None
+
+def getProductsList(number):
+
+    products = database.checkProductsList(number)
+
+    count = 0
+    msg = ''
+    for d in products:
+        msg += '%s\n'%d[2]
+
+    return(msg)
 
 def readMsg(data):
 
@@ -325,6 +336,65 @@ def readMsg(data):
                     sendMsg(msg, number)
 
                     database.insertHistory(number, msg, 12)
+
+            elif str(lastStatus) == '12':
+
+                yesWords = 'sim quero si s adicionar botar na lista quero por na lista produto na lista adicionar inserir'
+
+                countYes = checkProximityString(message, yesWords)
+
+                if countYes >= 1:
+
+                    actualList = getProductsList(number)
+
+                    msg = 'Aqui está sua lista de hoje:\n\n %s\nConseguiu encontrar tudo que você estava precisando?'
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, actualMsg, 9)
+
+                else:
+
+                    msg = 'Espero que eu tenha consigo te ajudar hoje. Você pode pode contar como foi sua experiência comigo hoje? Eu ainda estou aprendendo a entender os seres humanos e isso vai me ajudar bastante!\
+                        \nTenha um ótimo dia!'
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, actualMsg, 10)
+
+            elif str(lastStatus) == '9':
+
+                yesWords = 'sim quero si s adicionar botar na lista quero por na lista produto na lista adicionar inserir'
+
+                countYes = checkProximityString(message, yesWords)
+
+                if countYes >= 1:
+
+                    msg = 'Eba, que bom que consegui te ajudar a encontrar tudo que precisava. Se você quiser, pode me falar um pouquinho como eu posso melhorar a sua experiência.\
+                        \nEu ainda estou aprendendo a entender os humanos. Tenha um ótimo dia!'
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, actualMsg, 6)
+
+                else:
+
+                    msg = 'Poxa, sinto muito por não ter conseguido encontrar tudo o que você precisava. Estou melhorando a cada dia mais ainda é difícil pra mim\
+                        \nSerá que você tem alguma dica pra me dar de como eu posso melhorar o meu entendimento dos humanos?\
+                        \nEu vou ficar muito feliz em conseguir te ajudar melhor da próxima vez :)\
+                        \nTenha um ótimo dia'
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, actualMsg, 7)
+
+            elif str(lastStatus) == '6' or str(lastStatus) == '7' or str(lastStatus) == '10':
+
+                database.insertHistory(number, message, 2)
+
+                database.endChat(number)
+
+                # validate time > xxxx para encerrar atendimento
 
             return None
 
