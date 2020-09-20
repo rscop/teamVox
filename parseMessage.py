@@ -351,7 +351,7 @@ def readMsg(data):
 
                     sendMsg(msg, number)
 
-                    database.insertHistory(number, actualMsg, 9)
+                    database.insertHistory(number, msg, 9)
 
                 else:
 
@@ -360,7 +360,7 @@ def readMsg(data):
 
                     sendMsg(msg, number)
 
-                    database.insertHistory(number, actualMsg, 10)
+                    database.insertHistory(number, msg, 10)
 
             elif str(lastStatus) == '9':
 
@@ -375,7 +375,7 @@ def readMsg(data):
 
                     sendMsg(msg, number)
 
-                    database.insertHistory(number, actualMsg, 6)
+                    database.insertHistory(number, msg, 6)
 
                 else:
 
