@@ -61,7 +61,7 @@ def startChat(number):
 
 def endChat(number):
 
-    query = "update chat set end_date = CURRENT_TIMESTAMP where cel_number = %s end_date is null"%(number)
+    query = "update chat set end_date = CURRENT_TIMESTAMP where cel_number = '%s' end_date is null"%(number)
 
     insertData(query)
 
