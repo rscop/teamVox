@@ -122,7 +122,7 @@ def readMsg(data):
 
             database.insertHistory(number, message, -1)
 
-            lastSearch = database.checkLastSearch(number)
+            lastSearch = json.loads(database.checkLastSearch(number)[0][0])
             print('lastSearch: %s'% lastSearch)
 
             if str(lastStatus) == '0' or str(lastStatus) == '2' or str(lastStatus) == '-1' :
@@ -133,7 +133,7 @@ def readMsg(data):
 
                 listaProdutos = search[0]
 
-                actualLista = json.dumps(search[1][0][0])
+                actualLista = json.dumps(search[1])
 
                 database.insertSearch(number, actualLista)
 
@@ -168,7 +168,7 @@ def readMsg(data):
 
                     listaProdutos = search[0]
 
-                    actualLista = json.dumps(search[1][0][0])
+                    actualLista = json.dumps(search[1])
 
                     database.insertSearch(number, actualLista)
 
