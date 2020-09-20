@@ -34,7 +34,7 @@ def getProductDescription(product_id):
         except:
             description = 'não apresenta descrição'
 
-    if (product["content"]["stock"]).encode('utf-8').strip().lower() == 'true':
+    if (product["content"]["stock"]):
     # if (product["content"]["stock"]) == 'true':
         disponibility = "em estoque"
     else:
