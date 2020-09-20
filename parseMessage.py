@@ -8,7 +8,7 @@ import parser_paodeacucar
 import sys
 import difflib
 
-# env = get_ConfigFile(sys.argv[0]+'.env', 'production')
+env = get_ConfigFile(sys.argv[0]+'.env', 'production')
 
 def sendMsg(response, number):
 
