@@ -61,7 +61,7 @@ def selectItemByNumber(msg):
             'dez': "10"
             }
             
-            return response[d]
+            return response['%s'%d]
 
     return False
 
@@ -133,7 +133,7 @@ def readMsg(data):
 
                 listaProdutos = search[0]
 
-                actualLista = json.dumps(search[1])
+                actualLista = json.dumps(search[1][0][0])
 
                 database.insertSearch(number, actualLista)
 
@@ -168,7 +168,7 @@ def readMsg(data):
 
                     listaProdutos = search[0]
 
-                    actualLista = json.dumps(search[1])
+                    actualLista = json.dumps(search[1][0][0])
 
                     database.insertSearch(number, actualLista)
 
