@@ -36,7 +36,7 @@ def selectItemByNumber(msg, list):
 
     words = msg.encode(encoding="utf-8",errors="strict")
 
-    validationArray = ['um dois três tres quatro cinco seis sete oito nove dez'].encode(encoding="utf-8",errors="strict")
+    validationArray = 'um dois três tres quatro cinco seis sete oito nove dez'.encode(encoding="utf-8",errors="strict")
 
     validationArray = validationArray.split()
 
