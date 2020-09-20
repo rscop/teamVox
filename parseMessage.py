@@ -33,8 +33,7 @@ def setuplog(lf,lfBkpCnt,logLevel):
     handler.setFormatter(formatter)
 
     gtwlogger.addHandler(handler)
-    
-    logStart()
+
 
 def logit(m):
     if config['log_mode']=='2':
