@@ -14,6 +14,8 @@ import os
 env = get_ConfigFile('webservice.py'+'.env', 'production')
 
 def textToSpeech(number, message):
+
+    print('text to speech message: %s'%message)
     url = 'https://zenvia-team27.herokuapp.com/text-to-speech'
 
     payload = {
