@@ -133,9 +133,9 @@ def readMsg(data):
 
                 listaProdutos = search[0]
 
-                database.insertSearch(number, listaProdutos)
-
                 actualLista = search[1]
+
+                database.insertSearch(number, actualLista)
 
                 msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
                     \nPode pedir informação sobre um produto informando também o número dele.\
@@ -168,9 +168,9 @@ def readMsg(data):
 
                     listaProdutos = search[0]
 
-                    database.insertSearch(number, listaProdutos)
-
                     actualLista = search[1]
+
+                    database.insertSearch(number, actualLista)
 
                     msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
                         \nPode pedir informação sobre um produto informando também o número dele.\
