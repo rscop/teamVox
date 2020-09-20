@@ -413,7 +413,11 @@ def readMsg(data):
 
                 yesWords = 'sim quero si s adicionar botar na lista quero por na lista produto na lista adicionar inserir'
 
+                noWords = 'Não n não não quero consultar mais produtos não quero buscar produtos'
+
                 countYes = checkProximityString(message, yesWords)
+
+                countNo = checkProximityString(message, noWords)
 
                 if countYes >= 1:
 
@@ -423,7 +427,7 @@ def readMsg(data):
 
                     database.insertHistory(number, msg, 2)
 
-                else:
+                elif countNo >= 1:
 
                     if database.checkProductsList(number):
 
@@ -441,6 +445,28 @@ def readMsg(data):
                         sendMsg(msg, number)
 
                         database.insertHistory(number, msg, 10)
+                
+                else:
+
+                    search = parser_paodeacucar.searchProduct(message)
+
+                    listaProdutos = search[0]
+
+                    if listaProdutos.split(',')[0] == 'Poxa':
+                        msg = listaProdutos.encode(encoding="utf-8",errors="strict")
+                    else:
+                        msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
+                        \nPode pedir informação sobre um produto informando também o número dele.\
+                        \nPara fazer fazer outra consulta é só me falar o nome de um outro produto.\
+                        \nPara salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos.encode(encoding="utf-8",errors="strict")
+
+                    actualLista = json.dumps(search[1])
+
+                    database.insertSearch(number, actualLista)
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, msg, 3)
 
             elif str(lastStatus) == '12':
                 logit('Status 12')
@@ -493,7 +519,7 @@ def readMsg(data):
 
                     sendMsg(msg, number)
 
-                    database.insertHistory(number, actualMsg, 7)
+                    database.insertHistory(number, msg, 7)
 
             elif str(lastStatus) == '6' or str(lastStatus) == '7' or str(lastStatus) == '10':
                 logit('Status 6, 7 ou 10')
