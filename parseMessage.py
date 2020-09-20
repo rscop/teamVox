@@ -187,24 +187,23 @@ def readMsg(data):
                     # print(lastSearch)
 
                     selectedItem = selectItemByNumber(message)
-
-                    print('selectedItem: %s'%selectedItem)
-
-                    print('Selected Item on Array: %s'%lastSearch['%s'%selectedItem]['id'])
-                    infoProduct = parser_paodeacucar.getProductDescription(lastSearch['%s'%selectedItem]['id'])
-
-                    msg = 'Eu encontrei essas informações sobre o produto:\n%s\n%s\n%s\n\nVocês gostaria de adicionar este produto na sua lista de compras?'%(infoProduct['name'], infoProduct['description'], infoProduct['disponibility'])
-
-                    sendMsg(msg, number)
-
-                    database.insertHistory(number, msg, 8)
-
-                    if not selectedItem:
+                    
+                    if not selectedItem or selectedItem > len(lastSearch):
                         msg = "Eu não consegui entender o item que você quer consultar, pode repetir o número dele pra mim, por favor?"
 
                         sendMsg(msg, number)
 
                         database.insertHistory(number, msg, 4)
+
+                    else:
+
+                        infoProduct = parser_paodeacucar.getProductDescription(lastSearch['%s'%selectedItem]['id'])
+
+                        msg = 'Eu encontrei essas informações sobre o produto:\n%s\n%s\n%s\n\nVocês gostaria de adicionar este produto na sua lista de compras?'%(infoProduct['name'], infoProduct['description'], infoProduct['disponibility'])
+
+                        sendMsg(msg, number)
+
+                        database.insertHistory(number, msg, 8)
 
                     
                 # else:
