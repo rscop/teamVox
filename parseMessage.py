@@ -203,7 +203,7 @@ def readMsg(data):
         database.registerClient(name, number)
 
         actualMsg = "Olá, agora seu número está registrado em nosso sistema. \
-            \nSou o VOX, e vou te ajudar com as compras hoje. Espero que você esteja em um bom dia <3 \
+            \nEu sou o Oio, e vou te ajudar com as compras hoje. Espero que você esteja em um bom dia <3 \
             \nPrecisando de informações sobre algum produto? Me fala o nome dele que eu procuro aqui rapidinho"
 
         sendMsg(actualMsg, number)
@@ -498,7 +498,7 @@ def readMsg(data):
 
                     database.startChat(number)
 
-                    actualMsg = "Oi de novo, ficou muito feliz em poder te ajudar em mais um dia.\nO que você precisa hoje?"
+                    actualMsg = "Olá, olha o Oio de novo aqui. Fico muito feliz em poder te ajudar em mais um dia.\nO que você precisa hoje?"
 
                     sendMsg(actualMsg, number)
 
