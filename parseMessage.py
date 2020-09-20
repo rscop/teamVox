@@ -246,6 +246,8 @@ def readMsg(data):
 
                 countYes = checkProximityString(message, yesWords)
 
+                print('countYes: %s'%countYes)
+
                 if countYes >= 1:
 
                     insertOnList(number, lastItem)

@@ -153,7 +153,7 @@ def insertSearch(number, msg):
 
 def insertSearchItem(number, msg):
 
-    dataExist = checkLastItem(number)
+    dataExist = checkLastSearch(number)
 
     if dataExist == {}:
 
