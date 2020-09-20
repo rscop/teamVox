@@ -10,12 +10,41 @@ import difflib
 import unidecode
 import os
 
-# env = get_ConfigFile(sys.argv[0]+'.env', 'production')
-env = get_ConfigFile('webservice.py'+'.env', 'production')
+env = get_ConfigFile(sys.argv[0]+'.env', 'production')
+config = get_ConfigFile(sys.argv[0]+'.cfg', 'production')
+# env = get_ConfigFile('webservice.py'+'.env', 'production')
+
+# SetupLOG Funnction
+def setuplog(lf,lfBkpCnt,logLevel):
+
+    global gtwlogger
+
+    gtwlogger = logging.getLogger('GTW_LOG')
+
+    gtwlogger.setLevel(logging.DEBUG)
+
+    formatter = logging.Formatter('%(asctime)s-%(message)s')
+
+    # Add the log message handler to the logger
+    handler = logging.handlers.TimedRotatingFileHandler(lf, when='midnight', interval=1, backupCount=lfBkpCnt)
+
+    handler.setFormatter(formatter)
+
+    gtwlogger.addHandler(handler)
+    
+    logStart()
+
+def logit(m):
+    if config['log_mode']=='2':
+        print(m)
+    gtwlogger.debug(m)
+
+setuplog(config['logfile'],config['logfile_backup_count'],config['log_level'])
+
 
 def textToSpeech(number, message):
 
-    print('text to speech message: %s'%message)
+    logit('text to speech message: %s'%message)
     url = 'https://zenvia-team27.herokuapp.com/text-to-speech'
 
     payload = {
@@ -67,14 +96,15 @@ def sendMsg(response, number, isAudio=True):
         'content-type': 'application/json'
         }
 
-    # r = requests.post(url, data=json.dumps(payload), headers=headers)
+    r = requests.post(url, data=json.dumps(payload), headers=headers)
 
-    # Print for Debug
-    print(url, json.dumps(payload), (headers))
+    logit('Enviando mensagem para [%s]: %s'%(number, response))
+
+
+    # logit for Debug
+    # logit(url, json.dumps(payload), (headers))
 
     return None
-
-# print(sendMsg( 'testando A API', '5521999984171', True))
 
 def selectItemByNumber(msg):
 
@@ -167,7 +197,7 @@ def readMsg(data):
     number = data["message"]["from"]
 
     if database.isClient(number) == '[]':
-        print('Cliente ainda não registrado, registrando...')
+        logit('Cliente ainda não registrado, registrando...')
 
         database.registerClient(name, number)
 
@@ -186,24 +216,25 @@ def readMsg(data):
     else:
 
         if database.chatIsOpen(number):
+            logit('Cliente já possui um chat aberto')
             
             lastStatus = database.checkLastStatus(number)[0][0]
-            print('lastStatus: %s'%lastStatus)
+            logit('lastStatus: %s'%lastStatus)
 
             database.insertHistory(number, message, -1)
 
             lastSearch = json.loads(database.checkLastSearch(number)[0][0])
-            print('lastSearch: %s'% lastSearch)
+            logit('lastSearch: %s'% lastSearch)
 
             try:
                 lastItem = json.loads(database.checkLastItem(number))
             except:
                 lastItem = {}
 
-            print('lastItem: %s'% lastItem)
+            logit('lastItem: %s'% lastItem)
 
             if str(lastStatus) == '0' or str(lastStatus) == '2' or str(lastStatus) == '-1' or str(lastStatus) == '15' :
-                print('Status -1, 0, 2 ou 15')
+                logit('Status -1, 0, 2 ou 15')
 
                 search = parser_paodeacucar.searchProduct(message)
 
@@ -225,7 +256,7 @@ def readMsg(data):
                 database.insertHistory(number, msg, 3)
 
             elif str(lastStatus) == '3':
-                print('Status 3')
+                logit('Status 3')
 
                 infoWords = 'eu gostaria de mais informações sobre o produto eu quero mais informações sobre dados sobre descrição ingredientes o a\
                     informação do produto informação sobre eu quero informação do info mais infos quero saber sobre o\
@@ -236,12 +267,12 @@ def readMsg(data):
                     produto na lista adicionar na lista lista add adicionar adc'
 
                 countInfo = checkProximityString(message, infoWords)
-                print('countInfo: %s'%countInfo)
+                logit('countInfo: %s'%countInfo)
                 countLista = checkProximityString(message, infoLista)
-                print('countLista: %s'%countLista)
+                logit('countLista: %s'%countLista)
 
                 if countInfo < 1 and countLista < 1:
-                    print('Entrou no count menor que 2')
+                    logit('Entrou no count menor que 2')
 
                     search = parser_paodeacucar.searchProduct(message)
 
@@ -310,6 +341,7 @@ def readMsg(data):
 
 
             elif str(lastStatus) == '4':
+                logit('Status 4')
 
                 selectedItem = selectItemByNumber(message)
 
@@ -331,6 +363,7 @@ def readMsg(data):
                         database.insertHistory(number, msg, 8)
 
             elif str(lastStatus) == '5':
+                logit('Status 5')
 
                 selectedItem = selectItemByNumber(message)
                     
@@ -352,12 +385,13 @@ def readMsg(data):
                     database.insertHistory(number, msg, 11)
 
             elif str(lastStatus) == '8':
+                logit('Status 8')
 
                 yesWords = 'sim quero si s adicionar botar na lista quero por na lista produto na lista adicionar inserir'
 
                 countYes = checkProximityString(message, yesWords)
 
-                print('countYes: %s'%countYes)
+                logit('countYes: %s'%countYes)
 
                 if countYes >= 1:
 
@@ -370,6 +404,7 @@ def readMsg(data):
                 database.insertHistory(number, msg, 11)
 
             elif str(lastStatus) == '11':
+                logit('Status 11')
 
                 yesWords = 'sim quero si s adicionar botar na lista quero por na lista produto na lista adicionar inserir'
 
@@ -403,6 +438,7 @@ def readMsg(data):
                         database.insertHistory(number, msg, 10)
 
             elif str(lastStatus) == '12':
+                logit('Status 12')
 
                 yesWords = 'sim quero si s adicionar botar na lista quero por na lista produto na lista adicionar inserir'
 
@@ -428,6 +464,7 @@ def readMsg(data):
                     database.insertHistory(number, msg, 10)
 
             elif str(lastStatus) == '9':
+                logit('Status 9')
 
                 yesWords = 'sim quero si s adicionar botar na lista quero por na lista produto na lista adicionar inserir'
 
@@ -454,6 +491,7 @@ def readMsg(data):
                     database.insertHistory(number, actualMsg, 7)
 
             elif str(lastStatus) == '6' or str(lastStatus) == '7' or str(lastStatus) == '10':
+                logit('Status 6, 7 ou 10')
 
                 if endOldChat(number):
 
@@ -473,6 +511,7 @@ def readMsg(data):
             return None
 
         else:
+            logit('Já era cliente, abrindo novo chat')
 
             database.startChat(number)
 
@@ -485,9 +524,6 @@ def readMsg(data):
             database.insertHistory(number, actualMsg, 2)
 
             return None
-
-        response = parser_paodeacucar.searchProduct(message)
-        print(response)    
 
     return None
 

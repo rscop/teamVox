@@ -98,15 +98,15 @@ def receiveMsg():
 
     data = json.loads(request.data)
 
-    audio = isAudioReceived(data)
+    # audio = isAudioReceived(data)
 
-    if audio:
+    # if audio:
 
-        message = audio
+        # message = audio
 
-    else:
+    # else:
 
-        message = data["message"]["contents"][1]["text"]
+    message = data["message"]["contents"][1]["text"]
 
     name = data["message"]["visitor"]["name"]
 
@@ -119,14 +119,6 @@ def receiveMsg():
     response = '{"status": "Ok"}'
 
     return(response)
-
-# @app.route("/files")
-# def list_files():
-#     for filename in os.listdir(fileRepo):
-#         path = os.path.join(fileRepo, filename)
-#         if os.path.isfile(path):
-#             files.append(filename)
-#     return jsonify(files)
 
 @app.route("/files/<path:path>")
 def get_file(path):
