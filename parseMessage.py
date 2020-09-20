@@ -103,9 +103,9 @@ def readMsg(data):
                 msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\n\
                     Pode pedir informação sobre um produto informando também o número dele.\n\
                     Para fazer fazer outra consulta é só me falar o nome de um outro produto.\n\
-                    Para salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos.decode('latin').strip()
+                    Para salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos.decode('latin-1').strip()
 
-                sendMsg(msg)
+                sendMsg(msg, number)
                 database.insertHistory(number, msg, 3)
 
             elif str(lastStatus) == '3':
@@ -137,7 +137,7 @@ def readMsg(data):
                         Para fazer fazer outra consulta é só me falar o nome de um outro produto.\n\
                         Para salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos
 
-                    sendMsg(msg)
+                    sendMsg(msg, number)
 
                     database.insertHistory(number, msg, 3)
                 
