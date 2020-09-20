@@ -6,7 +6,11 @@ import sys
 
 def getProductDescription(product_id):
 
+    print('Product_id: %s'%product_id)
+
     url = 'https://api.gpa.digital/pa/v3/products/ecom/%s'%product_id
+
+    print('url: %s'%url)
 
     payload = {'storeId': '501'}
 
