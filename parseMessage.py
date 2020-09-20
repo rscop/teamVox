@@ -47,7 +47,7 @@ def selectItemByNumber(msg):
             response = {
             'um': "1",
             'dois': "2",
-            'três' "3",
+            'três': "3",
             'tres': "3",
             'quatro': "4",
             'cinco': "5",
