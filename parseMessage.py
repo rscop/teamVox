@@ -8,6 +8,7 @@ import parser_paodeacucar
 import sys
 import difflib
 import unidecode
+import os
 
 # env = get_ConfigFile(sys.argv[0]+'.env', 'production')
 env = get_ConfigFile('webservice.py'+'.env', 'production')
@@ -26,6 +27,9 @@ def textToSpeech(number, message):
     r = requests.post(url, data=json.dumps(payload), headers=headers)
 
     data = r.content
+
+    if os.path.exists('files/%stoSend.ogg'%number):
+        os.remove('files/%stoSend.ogg'%number)
 
     with open ('files/%stoSend.ogg'%number, 'wb') as d:
         d.write(data)
