@@ -66,7 +66,7 @@ def receiveMsg():
 
     number = data["message"]["from"]
 
-    logit('%s [%s]: %s'%(str(name), str(number), str(message)))
+    logit('%s [%s]: %s'%((name).encode('utf-8').strip(), (number).encode('utf-8').strip(), (message).encode('utf-8').strip()))
 
     readMsg(data)
 

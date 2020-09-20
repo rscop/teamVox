@@ -34,15 +34,15 @@ def insertData(query):
 
 def isClient(number):
 
-    query = "select * from clients where celnumber = %s"%str(number)
+    query = "select * from clients where celnumber = %s"%(number).encode('utf-8').strip()
     
     records = fetchData(query)
 
-    return str(records)
+    return (records).encode('utf-8').strip()
 
 def registerClient(name, number):
 
-    query = "insert into clients (name, celnumber) values ('%s', '%s')"%(str(name), str(number))
+    query = "insert into clients (name, celnumber) values ('%s', '%s')"%((name).encode('utf-8').strip(), (number).encode('utf-8').strip())
 
 
     insertData(query)
@@ -54,7 +54,7 @@ def startChat(number):
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
-    query = "insert into chat (start_date, cel_number) values ('%s', '%s')"%(str(timestamp), str(number))
+    query = "insert into chat (start_date, cel_number) values ('%s', '%s')"%((timestamp).encode('utf-8').strip(), (number).encode('utf-8').strip())
 
     insertData(query)
 
@@ -67,7 +67,7 @@ def insertHistory(number, msg):
     prequery = "select id from chat where cel_number = %s and end_date is null"%number
     chat_id = fetchData(prequery)[0][0]
 
-    query = "insert into msg_history (chat_id, origin, destination, reg_date, msg) values ('%s', '%s', '%s', '%s', '%s')"%(str(chat_id), '0', '0', str(timestamp), msg)
+    query = "insert into msg_history (chat_id, origin, destination, reg_date, msg) values ('%s', '%s', '%s', '%s', '%s')"%((chat_id).encode('utf-8').strip(), '0', '0', (timestamp).encode('utf-8').strip(), msg)
     insertData(query)
 
     return None

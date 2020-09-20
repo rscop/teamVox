@@ -21,7 +21,7 @@ def getProductDescription(product_id):
     except:
         description = 'não apresenta descrição'
 
-    if str(product["content"]["stock"]).lower() == 'true':
+    if (product["content"]["stock"]).encode('utf-8').strip().lower() == 'true':
         disponibility = "em estoque"
     else:
         disponibility = "fora de estoque"
@@ -38,7 +38,7 @@ def searchProduct(product):
 
     payload = {
         'ts': 'json-rac',
-        'w': '%s'%str(product),
+        'w': '%s'%(product).encode('utf-8').strip(),
         'cnt': '5',
         'ref': 'www.paodeacucar.com',
         'lot': 'json',
