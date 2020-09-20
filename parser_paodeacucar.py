@@ -49,21 +49,34 @@ def searchProduct(product):
 
     products = r.json()
 
+    productsList = {}
+
     try:
         products = products["results"]["product_suggestions"]["suggestions"]
 
-        msg = "Está é a listinha de produtos que conseguir encontrar para você no Pão de Açúcar.\n"
+        msg = ""
+
+        count = 1
+
         for d in products:
             title = d["title"]
-            productId = d["url"].split('/')[4]
-            rank = d["rank"]
-            price = d["price"]
-            moreInfo = getProductDescription(productId)
-            msg+='%s que custa %s reais. Atualmente ele está %s e %s \n'%(title, price, moreInfo['disponibility'], moreInfo['description'])
 
-        msg = msg.replace("<b>","").replace("</b>", "").replace("<p>", "").replace("</p>", "").replace("<br>", "")
+            productId = d["url"].split('/')[4]
+
+            # rank = d["rank"]
+
+            price = d["price"]
+
+            # moreInfo = getProductDescription(productId)
+
+            msg+='%s. %s que custa %s reais.\n'%(count, title, price)
+
+            productsList['%s'%count] = {"Name": title, "Id": productId}
+
+            count += 1
+
     except:
-        msg = 'Poxa, eu não consegui encontrar nada com o que você me mandou. \
+        msg = 'Poxa, eu não consegui encontrar nada com o que você me mandou.\
             \nFaz o seguinte, tenta me mandar o nome do produto de novo, um de cada vez'
 
-    return msg
+    return [msg, productsList]

@@ -44,7 +44,6 @@ def registerClient(name, number):
 
     query = "insert into clients (name, celnumber) values ('%s', '%s')"%(name, number)
 
-
     insertData(query)
 
     return None
@@ -60,14 +59,14 @@ def startChat(number):
 
     return None
 
-def insertHistory(number, msg):
+def insertHistory(number, msg, msg_id):
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
     prequery = "select id from chat where cel_number = %s and end_date is null"%number
     chat_id = fetchData(prequery)[0][0]
 
-    query = "insert into msg_history (chat_id, origin, destination, reg_date, msg) values ('%s', '%s', '%s', '%s', '%s')"%(chat_id, '0', '0', timestamp, msg)
+    query = "insert into msg_history (chat_id, origin, destination, reg_date, msg) values ('%s', '%s', '%s', '%s', '%s')"%(chat_id, '0', '0', timestamp, msg, msg_id)
     insertData(query)
 
     return None
@@ -79,6 +78,42 @@ def chatIsOpen(number):
         return False
     else:
         return True
+
+def checkLastStatus(number):
+
+    query = "select * from chat where cel_number = %s and end_date is not null order by id desc limit 1"%number
+
+    return fetchData(query)
+
+def checkLastSearch(number):
+
+    query = "select * from lastSearch where number = %s"%number
+
+    checkSearch = fetchData(query)
+
+    if checkSearch == '[]':
+
+        return {}
+
+    else:
+
+        return checkSearch
+
+def insertSearch(number, msg):
+
+    dataExist = checkLastSearch(number)
+
+    if dataExist == '[]':
+
+        query = "insert into lastSearch (number, result) values ('%s', '%s')"%(number, msg)
+
+    else:
+
+        query = "UPDATE lastSearch SET result='%s' WHERE cel_number = '%s';"%(number, msg)
+
+    insertData(query)
+
+    return None
 
 # chatIsOpen('5521999984171')
 
