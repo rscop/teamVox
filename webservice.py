@@ -102,6 +102,8 @@ def receiveMsg():
 
     audio = isAudioReceived(data)
 
+    print('AAAAAAAAAAUDIOOOOOOO========================== %s'%audio)
+
     if audio:
 
         message = audio
