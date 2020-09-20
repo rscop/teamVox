@@ -38,7 +38,7 @@ def isClient(number):
     
     records = fetchData(query)
 
-    return (records).encode('utf-8').strip()
+    return records
 
 def registerClient(name, number):
 

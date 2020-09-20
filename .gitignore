@@ -1,3 +1,4 @@
 webservice.log
 webservice.py.env
+webservice.py.cfg
 *.pyc
