@@ -7,6 +7,7 @@ import database
 import parser_paodeacucar
 import sys
 import difflib
+import unidecode
 
 env = get_ConfigFile(sys.argv[0]+'.env', 'production')
 
@@ -37,9 +38,9 @@ def sendMsg(response, number):
 
 def selectItemByNumber(msg):
 
-    words = msg.split()
+    words = unidecode.unidecode(msg).split()
 
-    validationArray = 'um dois três tres quatro cinco seis sete oito nove dez'
+    validationArray = 'um dois tres quatro cinco seis sete oito nove dez'
 
     validationArray = validationArray.split()
 
@@ -50,7 +51,6 @@ def selectItemByNumber(msg):
             response = dict()
             response['um'] = "1"
             response['dois'] = "2"
-            response['três'] = "3"
             response['tres'] = "3"
             response['quatro'] = "4"
             response['cinco'] = "5"
