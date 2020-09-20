@@ -7,6 +7,8 @@ import os
 import json
 from parseMessage import readMsg
 from getConfigFile import get_ConfigFile
+import json
+import requests
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -45,6 +47,39 @@ def logit(m):
         print(m)
     gtwlogger.debug(m)
 
+def audioToText(file):
+
+    url = 'https://zenvia-team27.herokuapp.com/speech-to-text'
+
+    payload = {
+        "audioFile": "%s"%file
+    }
+
+    headers = {
+        'content-type': 'application/json'
+        }
+
+    r = requests.post(url, data=json.dumps(payload), headers=headers)
+
+    data = r.content
+
+    return data
+
+def isAudioReceived(data):
+
+    msgtype = data["message"]["contents"][1]["type"]
+
+    msgMimeType = data["message"]["contents"][1]["fileMimeType"]
+
+    if msgtype == 'file' and msgMimeType == 'audio/ogg; codecs=opus':
+
+        data = audioToText(data["message"]["contents"][1]["fileUrl"])
+
+        return data
+    
+    else:
+
+        return False
 
 # Method for data query (Verify API Integrity)
 @app.route('/healthcheck', methods=['GET'])
@@ -63,7 +98,15 @@ def receiveMsg():
 
     data = json.loads(request.data)
 
-    message = data["message"]["contents"][1]["text"]
+    audio = isAudioReceived(data)
+
+    if audio:
+
+        message = audio
+
+    else:
+
+        message = data["message"]["contents"][1]["text"]
 
     name = data["message"]["visitor"]["name"]
 
@@ -77,13 +120,13 @@ def receiveMsg():
 
     return(response)
 
-@app.route("/files")
-def list_files():
-    for filename in os.listdir(fileRepo):
-        path = os.path.join(fileRepo, filename)
-        if os.path.isfile(path):
-            files.append(filename)
-    return jsonify(files)
+# @app.route("/files")
+# def list_files():
+#     for filename in os.listdir(fileRepo):
+#         path = os.path.join(fileRepo, filename)
+#         if os.path.isfile(path):
+#             files.append(filename)
+#     return jsonify(files)
 
 @app.route("/files/<path:path>")
 def get_file(path):
