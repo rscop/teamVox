@@ -79,9 +79,13 @@ def chatIsOpen(number):
     else:
         return True
 
+def chatOpenId(number):
+    query = "select id from chat where cel_number = %s and end_date is null"%number
+    return fetchData(query)
+     
 def checkLastStatus(number):
 
-    query = "select * from chat where cel_number = %s and end_date is not null order by id desc limit 1"%number
+    query = "select msg_type from msg_history where chat_id = %s and end_date is not null order by id desc limit 1"%chatOpenId(number)
 
     return fetchData(query)
 
