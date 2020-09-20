@@ -46,21 +46,20 @@ def selectItemByNumber(msg):
     for d in words:
 
         if d in validationArray:
-            
-            response = {
-            'um': "1",
-            'dois': "2",
-            'três': "3",
-            'tres': "3",
-            'quatro': "4",
-            'cinco': "5",
-            'seis': "6",
-            'sete': "7",
-            'oito': "8",
-            'nove': "9",
-            'dez': "10"
-            }
-            
+
+            response = dict()
+            response['um'] = "1"
+            response['dois'] = "2"
+            response['três'] = "3"
+            response['tres'] = "3"
+            response['quatro'] = "4"
+            response['cinco'] = "5"
+            response['seis'] = "6"
+            response['sete'] = "7"
+            response['oito'] = "8"
+            response['nove'] = "9"
+            response['dez'] = "10"
+
             return response['%s'%d]
 
     return False
