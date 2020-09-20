@@ -209,7 +209,7 @@ def readMsg(data):
 
                 listaProdutos = search[0]
 
-                if listaProdutos.split(',')[0] == 'Poxa'
+                if listaProdutos.split(',')[0] == 'Poxa':
                     msg = listaProdutos.encode(encoding="utf-8",errors="strict")
                 else:
                     msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
@@ -247,7 +247,7 @@ def readMsg(data):
 
                     listaProdutos = search[0]
 
-                    if listaProdutos.split(',')[0] == 'Poxa'
+                    if listaProdutos.split(',')[0] == 'Poxa':
                         msg = listaProdutos.encode(encoding="utf-8",errors="strict")
                     else:
                         msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
