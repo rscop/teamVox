@@ -12,8 +12,8 @@ import difflib
 import unidecode
 import os
 
-env = get_ConfigFile(sys.argv[0]+'.env', 'production')
-# config = get_ConfigFile(sys.argv[0]+'.cfg', 'production')
+# env = get_ConfigFile(sys.argv[0]+'.env', 'production')
+config = get_ConfigFile(sys.argv[0]+'.cfg', 'production')
 env = get_ConfigFile('webservice.py'+'.env', 'production')
 
 # SetupLOG Funnction
