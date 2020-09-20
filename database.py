@@ -64,7 +64,7 @@ def endChat(number):
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
-    query = "update chat set end_date = '%s' where cel_number = '%s' end_date is null"%(timestamp, number)
+    query = "update chat set end_date = '%s' where cel_number = '%s' and end_date is null"%(timestamp, number)
 
     insertData(query)
 
