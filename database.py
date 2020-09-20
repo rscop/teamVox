@@ -64,7 +64,7 @@ def insertHistory(number, msg, msg_id):
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
     prequery = "select id from chat where cel_number = %s and end_date is null"%number
-    chat_id = fetchData(prequery)
+    chat_id = fetchData(prequery)[0][0]
 
     query = "insert into msg_history (chat_id, origin, destination, reg_date, msg, msg_type) values ('%s', '%s', '%s', '%s', '%s', '%s')"%(chat_id, '0', '0', timestamp, msg, msg_id)
     insertData(query)
