@@ -110,13 +110,13 @@ def endOldChat(number):
 
     search = database.getChatTime(number)[0]
 
-    timeIni = int(search[2])
-    timeEnd = int(search[3])
+    timeIni = search[3]
+    timeEnd = search[4]
 
     if (timeEnd - timeIni < 3600):
         return False
     else:
-        return True    
+        return True
 
 def readMsg(data):
 
