@@ -159,6 +159,8 @@ def checkLastItem(number):
         return checkSearch[0][0]
 
 def insertSearch(number, msg):
+    print('Insert Search')
+    print('number: %s \nMessage: %s')%(number, msg)
 
     dataExist = checkLastSearch(number)
 

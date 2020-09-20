@@ -292,7 +292,7 @@ def readMsg(data):
                         \nPara salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos.encode(encoding="utf-8",errors="strict")
 
                     actualLista = json.dumps(search[1])
-
+                    
                     database.insertSearch(number, actualLista)
 
                     sendMsg(msg, number)
