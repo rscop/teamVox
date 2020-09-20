@@ -409,8 +409,6 @@ def readMsg(data):
 
             elif str(lastStatus) == '6' or str(lastStatus) == '7' or str(lastStatus) == '10':
 
-                database.endChat(number)
-
                 if endOldChat(number):
 
                     database.startChat(number)
@@ -423,6 +421,8 @@ def readMsg(data):
                 else:
 
                     database.insertHistory(number, message, 15)
+
+                database.endChat(number)
 
             return None
 
