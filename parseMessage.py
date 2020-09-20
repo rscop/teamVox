@@ -187,8 +187,8 @@ def readMsg(data):
                 countLista = checkProximityString(message, infoLista)
                 print('countLista: %s'%countLista)
 
-                if countInfo < 2 and countLista < 2:
-                    print('Entrou no count menor que 3')
+                if countInfo < 1 and countLista < 1:
+                    print('Entrou no count menor que 2')
 
                     search = parser_paodeacucar.searchProduct(message)
 
