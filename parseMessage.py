@@ -8,7 +8,7 @@ import parser_paodeacucar
 import sys
 import difflib
 
-env = get_ConfigFile(sys.argv[0]+'.env', 'production')
+# env = get_ConfigFile(sys.argv[0]+'.env', 'production')
 
 def sendMsg(response, number):
 
@@ -28,7 +28,10 @@ def sendMsg(response, number):
         'content-type': 'application/json'
         }
 
-    r = requests.post(url, data=json.dumps(payload), headers=headers)
+    # r = requests.post(url, data=json.dumps(payload), headers=headers)
+
+    # Print for Debug
+    print(url, json.dumps(payload), (headers))
 
     return None
 
