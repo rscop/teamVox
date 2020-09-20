@@ -189,3 +189,26 @@ def insertSearchItem(number, msg):
     insertData(query)
 
     return None
+
+def getChatTime(number):
+
+    ts = time.time()
+    timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+
+    query = "\
+    select\
+        msh.id as msg_id,\
+        SEC_TO_TIME(TIME_TO_SEC(msh.reg_date)) as last_msg,\
+        SEC_TO_TIME(TIME_TO_SEC(%s)) as time_now,\
+        TIME_TO_SEC(ch.start_date) as time_ini_sec,\
+        TIME_TO_SEC(msh.reg_date) as time_last_msg_sec\
+    from\
+        chat as ch inner join msg_history as msh on ch.id = msh.chat_id\
+    where \
+        ch.cel_number = '%s'\
+        and ch.end_date is null\
+        and msh.id = (\
+            select max(id) from\
+            msg_history msg where msg.chat_id = ch.id);"%(timestamp, number)
+
+    return fetchData(query)

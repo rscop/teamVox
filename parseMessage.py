@@ -107,6 +107,18 @@ def getProductsList(number):
 
     return(msg)
 
+def endOldChat(number):
+
+    search = database.getChatTime()[0]
+
+    timeIni = int(search[2])
+    timeEnd = int(search[3])
+
+    if (timeEnd - timeIni < 3600):
+        return False
+    else:
+        return True    
+
 def readMsg(data):
 
     message = data["message"]["contents"][1]["text"].lower()
@@ -151,9 +163,8 @@ def readMsg(data):
 
             print('lastItem: %s'% lastItem)
 
-            if str(lastStatus) == '0' or str(lastStatus) == '2' or str(lastStatus) == '-1' :
-                print('Status 0 2 ou -1')
-                # todo Lista de Produtos
+            if str(lastStatus) == '0' or str(lastStatus) == '2' or str(lastStatus) == '-1' or str(lastStatus) == '15' :
+                print('Status -1, 0, 2 ou 15')
 
                 search = parser_paodeacucar.searchProduct(message)
 
@@ -399,11 +410,20 @@ def readMsg(data):
 
             elif str(lastStatus) == '6' or str(lastStatus) == '7' or str(lastStatus) == '10':
 
-                database.insertHistory(number, message, 2)
-
                 database.endChat(number)
 
-                # validate time > xxxx para encerrar atendimento
+                if endOldChat(number):
+
+                    database.startChat(number)
+
+                    actualMsg = "Oi de novo, ficou muito feliz em poder te ajudar em mais um dia.\nO que você precisa hoje?"
+
+                    sendMsg(actualMsg, number)
+
+                    database.insertHistory(number, actualMsg, 2)
+                else:
+
+                    database.insertHistory(number, message, 15)
 
             return None
 
@@ -420,8 +440,6 @@ def readMsg(data):
             database.insertHistory(number, actualMsg, 2)
 
             return None
-
-        # sendMsg("Você já sabe a marca que gostaria de consultar?\n Ou prefere ouvir as recomendações mesmo?", number)
 
         response = parser_paodeacucar.searchProduct(message)
         print(response)    
