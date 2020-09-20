@@ -100,7 +100,6 @@ def getProductsList(number):
 
     products = database.checkProductsList(number)
 
-    count = 0
     msg = ''
     for d in products:
         msg += '%s\n'%d[2]
@@ -109,7 +108,7 @@ def getProductsList(number):
 
 def endOldChat(number):
 
-    search = database.getChatTime()[0]
+    search = database.getChatTime(number)[0]
 
     timeIni = int(search[2])
     timeEnd = int(search[3])
