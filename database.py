@@ -106,6 +106,10 @@ def checkLastSearch(number):
 
     checkSearch = fetchData(query)
 
+    print('checkLastSearch')
+
+    print(checkSearch)
+
     if str(checkSearch) == '[]' or str(checkSearch) == '{}' or len(checkSearch) == 0:
 
         return {}
@@ -164,7 +168,7 @@ def insertSearch(number, msg):
 
     dataExist = checkLastSearch(number)
 
-    if str(dataExist) == '[]':
+    if str(dataExist) == '[]' or str(dataExist) == '{}' or len(dataExist) == 0:
 
         query = "insert into lastSearch (cel_number, result) values ('%s', '%s')"%(number, msg)
 
