@@ -68,7 +68,7 @@ def sendMsg(response, number, isAudio=True):
 
     return None
 
-print(sendMsg( 'testando A API', '5521999984171', True))
+# print(sendMsg( 'testando A API', '5521999984171', True))
 
 def selectItemByNumber(msg):
 
