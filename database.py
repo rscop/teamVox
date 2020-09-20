@@ -95,6 +95,38 @@ def checkLastSearch(number):
 
     checkSearch = fetchData(query)
 
+    if str(checkSearch) == '[]':
+
+        return {}
+
+    else:
+
+        return checkSearch
+
+def checkProductsList(number):
+
+    prequery = "select id from chat where cel_number = %s and end_date is null"%number
+
+    chat_id = fetchData(prequery)[0][0]
+
+    query = 'select * from client_product_list where chat_id = %s order by id desc'%chat_id
+
+    result = fetchData(query)
+
+    if str(result) == '[]':
+
+        return False
+
+    else:
+
+        return result
+
+def checkLastItem(number):
+
+    query = "select item from lastSearch where cel_number = %s"%number
+
+    checkSearch = fetchData(query)
+
     if checkSearch == '[]':
 
         return {}
@@ -114,6 +146,22 @@ def insertSearch(number, msg):
     else:
 
         query = "UPDATE lastSearch SET result='%s' WHERE cel_number = '%s';"%(msg, number)
+
+    insertData(query)
+
+    return None
+
+def insertSearchItem(number, msg):
+
+    dataExist = checkLastItem(number)
+
+    if str(dataExist) == '[]':
+
+        query = "insert into lastSearch (cel_number, item) values ('%s', '%s')"%(number, msg)
+
+    else:
+
+        query = "UPDATE lastSearch SET item='%s' WHERE cel_number = '%s';"%(msg, number)
 
     insertData(query)
 

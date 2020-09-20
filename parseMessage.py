@@ -82,6 +82,14 @@ def checkProximityString(msg, listWords):
 
     return matches
 
+def insertOnList(number, lastitem):
+
+    product = parser_paodeacucar.searchProduct(lastitem)[0]
+
+    database.insertSearchItem(number, product)
+
+    return None
+
 def readMsg(data):
 
     message = data["message"]["contents"][1]["text"].lower()
@@ -118,6 +126,9 @@ def readMsg(data):
 
             lastSearch = json.loads(database.checkLastSearch(number)[0][0])
             print('lastSearch: %s'% lastSearch)
+
+            lastItem = json.loads(database.checkLastItem(number)[0][0])
+            print('lastItem: %s'% lastItem)
 
             if str(lastStatus) == '0' or str(lastStatus) == '2' or str(lastStatus) == '-1' :
                 print('Status 0 2 ou -1')
@@ -192,6 +203,8 @@ def readMsg(data):
 
                         msg = 'Eu encontrei essas informações sobre o produto:\n%s\n%s\n%s\n\nVocês gostaria de adicionar este produto na sua lista de compras?'%(infoProduct['name'], infoProduct['description'], infoProduct['disponibility'])
 
+                        database.insertSearchItem(number, selectedItem['id'])
+
                         sendMsg(msg, number)
 
                         database.insertHistory(number, msg, 8)
@@ -205,10 +218,6 @@ def readMsg(data):
             elif str(lastStatus) == '4':
 
                 selectedItem = selectItemByNumber(message)
-
-                print('selectedItem: %s'%selectedItem)
-
-                print('len(lastSearch): %s'%len(lastSearch))
 
                 if not selectedItem or int(selectedItem) > len(lastSearch):
                     msg = "Eu não consegui entender o item que você quer consultar, pode repetir o número dele pra mim, por favor?"
@@ -226,6 +235,46 @@ def readMsg(data):
                         sendMsg(msg, number)
 
                         database.insertHistory(number, msg, 8)
+
+            elif str(lastStatus) == '8':
+
+                yesWords = 'sim quero si s adicionar botar na lista quero por na lista produto na lista adicionar inserir'
+
+                countYes = checkProximityString(message, yesWords)
+
+                if countYes >= 1:
+
+                    insertOnList(number, lastItem)
+
+                msg = 'Maravilha, gostaria de consultar mais algum produto?'
+
+                sendMsg(msg, number)
+
+                database.insertHistory(number, msg, 11)
+
+            elif str(lastStatus) == '11':
+
+                yesWords = 'sim quero si s adicionar botar na lista quero por na lista produto na lista adicionar inserir'
+
+                countYes = checkProximityString(message, yesWords)
+
+                if countYes >= 1:
+
+                    msg = 'Tudo bem, qual produto quer consultar?'
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, msg, 2)
+
+                else:
+
+                    #if valida se tem lista
+
+                    msg = 'Você gostaria de receber sua lista de compras?'
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, msg, 12)
 
             return None
 
