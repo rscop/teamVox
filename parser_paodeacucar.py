@@ -67,7 +67,7 @@ def searchProduct(product):
             try:
                 price = d["price"]
             except:
-                price = 'Não Informado'
+                price = '00.00'
 
             # moreInfo = getProductDescription(productId)
 
