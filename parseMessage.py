@@ -34,7 +34,9 @@ def sendMsg(response, number):
 
 def checkProximityString(msg, listWords):
 
-    words = listWords.encode(encoding="utf-8",errors="strict").split()
+    words = listWords.encode(encoding="utf-8",errors="strict")
+
+    words = words.split
 
     string = msg.split()
 

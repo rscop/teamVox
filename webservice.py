@@ -8,6 +8,9 @@ import json
 from parseMessage import readMsg
 from getConfigFile import get_ConfigFile
 
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 app = Flask(__name__)
 
 def logStart():
