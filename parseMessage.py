@@ -9,13 +9,13 @@ import sys
 
 env = get_ConfigFile(sys.argv[0]+'.env', 'production')
 
-def sendMsg(response):
+def sendMsg(response, number):
 
     url = 'https://api.zenvia.com/v1/channels/whatsapp/messages'
 
     payload = {
         "from": "%s"%env['SECURE_STRING'],
-        "to": '5521999984171',
+        "to": '%s'%number,
         "contents": [{
         'type': 'text',
         'text': '%s'%response
@@ -39,7 +39,7 @@ def readMsg(data):
     number = data["message"]["from"]
 
     # if 'marco' in message:
-    #     sendMsg('teeeeeeeeest')
+    #     sendMsg('teeeeeeeeest', number)
 
     # if isClient(number):
 
@@ -50,7 +50,7 @@ def readMsg(data):
 
         sendMsg("Olá, agora seu número está registrado em nosso sistema. \
             \nSou o VOX, e vou te ajudar com as compras hoje. Espero que você esteja em um bom dia <3 \
-            \nPrecisando de informações sobre algum produto? Me fala o nome dele que eu procuro aqui rapidinho")
+            \nPrecisando de informações sobre algum produto? Me fala o nome dele que eu procuro aqui rapidinho", number)
         database.startChat(number)
         database.insertHistory(number, message)
 
@@ -69,9 +69,9 @@ def readMsg(data):
 
             # else:
 
-            actualMsg = "Você já sabe a marca que gostaria de consultar?\n Ou prefere ouvir as recomendações mesmo?"
+            actualMsg = "Você já sabe a marca que gostaria de consultar?\nOu prefere ouvir as recomendações mesmo?"
 
-            sendMsg(actualMsg)
+            sendMsg(actualMsg, number)
 
             database.insertHistory(number, actualMsg)
 
@@ -85,13 +85,13 @@ def readMsg(data):
 
             actualMsg = "Oi de novo, ficou muito feliz em poder te ajudar em mais um dia.\nO que você precisa hoje?"
 
-            sendMsg(actualMsg)
+            sendMsg(actualMsg, number)
 
             database.insertHistory(number, actualMsg)
 
             return None
 
-        # sendMsg("Você já sabe a marca que gostaria de consultar?\n Ou prefere ouvir as recomendações mesmo?")
+        # sendMsg("Você já sabe a marca que gostaria de consultar?\n Ou prefere ouvir as recomendações mesmo?", number)
 
         response = parser_paodeacucar.searchProduct(message)
         print(response)    
