@@ -74,7 +74,7 @@ def insertHistory(number, msg, msg_id):
 def chatIsOpen(number):
     query = "select * from chat where cel_number = %s and end_date is null"%number
     chatStatus = fetchData(query)
-    if chatStatus == '[]':
+    if str(chatStatus) == '[]':
         return False
     else:
         return True
@@ -85,7 +85,7 @@ def chatOpenId(number):
      
 def checkLastStatus(number):
 
-    query = "select msg_type from msg_history where chat_id = %s and end_date is not null order by id desc limit 1"%chatOpenId(number)
+    query = "select msg_type from msg_history where chat_id = %s order by id desc limit 1"%chatOpenId(number)[0][0]
 
     return fetchData(query)
 

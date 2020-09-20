@@ -171,9 +171,9 @@ def readMsg(data):
 
             actualMsg = "Oi de novo, ficou muito feliz em poder te ajudar em mais um dia.\nO que você precisa hoje?"
 
-            sendMsg(actualMsg, number, 2)
+            sendMsg(actualMsg, number)
 
-            database.insertHistory(number, actualMsg, 0)
+            database.insertHistory(number, actualMsg, 2)
 
             return None
 
