@@ -45,7 +45,7 @@ def getProductDescription(product_id):
 
     return response
 
-# print(getProductDescription(434343))
+print(getProductDescription(434343))
 
 def searchProduct(product):
 

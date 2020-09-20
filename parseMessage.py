@@ -207,7 +207,7 @@ def readMsg(data):
 
                         msg = 'Eu encontrei essas informações sobre o produto:\n%s\n%s\n%s\n\nVocês gostaria de adicionar este produto na sua lista de compras?'%(infoProduct['name'], infoProduct['description'], infoProduct['disponibility'])
 
-                        database.insertSearchItem(number, selectedItem['id'])
+                        database.insertSearchItem(number, lastSearch['%s'%selectedItem]['id'])
 
                         sendMsg(msg, number)
 
