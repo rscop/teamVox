@@ -38,7 +38,7 @@ def searchProduct(product):
 
     payload = {
         'ts': 'json-rac',
-        'w': '%s'%(product).encode('utf-8').strip(),
+        'w': '%s'%product,
         'cnt': '5',
         'ref': 'www.paodeacucar.com',
         'lot': 'json',
@@ -64,8 +64,10 @@ def searchProduct(product):
             productId = d["url"].split('/')[4]
 
             # rank = d["rank"]
-
-            price = d["price"]
+            try:
+                price = d["price"]
+            except:
+                price = 'Não Informado'
 
             # moreInfo = getProductDescription(productId)
 
@@ -75,7 +77,8 @@ def searchProduct(product):
 
             count += 1
 
-    except:
+    except Exception as e:
+        print(e)
         msg = 'Poxa, eu não consegui encontrar nada com o que você me mandou.\
             \nFaz o seguinte, tenta me mandar o nome do produto de novo, um de cada vez'
 
