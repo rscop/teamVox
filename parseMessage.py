@@ -222,7 +222,7 @@ def readMsg(data):
                     
                 else:
 
-                    insertOnList(number, lastItem)
+                    insertOnList(number, lastSearch['%s'%selectedItem]['id'])
 
                     msg = 'Inseri aqui pra você, ta bom? Gostaria de consultar mais algum produto?'
 
