@@ -34,7 +34,7 @@ def sendMsg(response, number):
 
 def checkProximityString(msg, listWords):
 
-    words = listWords.split()
+    words = listWords.encode(encoding="utf-8",errors="strict").split()
 
     string = msg.split()
 
@@ -42,9 +42,9 @@ def checkProximityString(msg, listWords):
 
     for d in string:
 
-        if str(difflib.get_close_matches(d,words)) != '[]':
+        if str(difflib.get_close_matches(d.encode(encoding="utf-8",errors="strict"),words)) != '[]':
 
-            matches += 0
+            matches += 1
 
     return matches
 
@@ -111,9 +111,9 @@ def readMsg(data):
             elif str(lastStatus) == '3':
                 print('Status 3')
 
-                infoWords = 'eu gostaria de mais informações sobre o produto eu quero mais informações sobre o a\
+                infoWords = 'eu gostaria de mais informações sobre o produto eu quero mais informações sobre dados sobre descrição ingredientes o a\
                     informação do produto informação sobre eu quero informação do info mais infos quero saber sobre o\
-                    descrição do produto descrever falar sobre o que é o produto que produto é esse info +'
+                    descrição do produto descrever falar sobre o que é o produto que produto é esse info + eu quero ver'
 
                 infoLista = 'eu gostaria de adicionar o produto na lista eu quero adicionar o produto na lista eu quero\
                     botar na lista quero adicionar na lista colocar produto na lista eu quero por o produto na lista botar o\
