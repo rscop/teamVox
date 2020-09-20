@@ -107,17 +107,19 @@ def insertSearch(number, msg):
 
     dataExist = checkLastSearch(number)
 
-    if dataExist == '[]':
+    if str(dataExist) == '[]':
 
-        query = "insert into lastSearch (number, result) values ('%s', '%s')"%(number, msg)
+        query = "insert into lastSearch (cel_number, result) values ('%s', '%s')"%(number, msg)
 
     else:
 
-        query = "UPDATE lastSearch SET result='%s' WHERE cel_number = '%s';"%(number, msg)
+        query = "UPDATE lastSearch SET result='%s' WHERE cel_number = '%s';"%(msg, number)
 
     insertData(query)
 
     return None
+
+# insertSearch('5521999984171', '{"1": {"Nome": "Alface", "Valor": "25"}, "2": {"Nome": "Tomate", "Valor": "58"} }')
 
 # chatIsOpen('5521999984171')
 
