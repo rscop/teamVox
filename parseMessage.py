@@ -329,13 +329,22 @@ def readMsg(data):
 
                 else:
 
-                    #if valida se tem lista
+                    if database.checkProductsList(number):
 
-                    msg = 'Você gostaria de receber sua lista de compras?'
+                        msg = 'Você gostaria de receber sua lista de compras?'
 
-                    sendMsg(msg, number)
+                        sendMsg(msg, number)
 
-                    database.insertHistory(number, msg, 12)
+                        database.insertHistory(number, msg, 12)
+                    
+                    else:
+
+                        msg = 'Espero que eu tenha consigo te ajudar hoje. Você pode pode contar como foi sua experiência comigo hoje? Eu ainda estou aprendendo a entender os seres humanos e isso vai me ajudar bastante!\
+                        \nTenha um ótimo dia!'
+
+                        sendMsg(msg, number)
+
+                        database.insertHistory(number, msg, 10)
 
             elif str(lastStatus) == '12':
 
