@@ -190,8 +190,8 @@ def readMsg(data):
 
                     print('selectedItem: %s'%selectedItem)
 
-                    print('Selected Item on Array: %s'%lastSearch['%s'%selectedItem])
-                    infoProduct = parser_paodeacucar.getProductDescription(lastSearch['%s'%selectedItem])
+                    print('Selected Item on Array: %s'%lastSearch['%s'%selectedItem]['id'])
+                    infoProduct = parser_paodeacucar.getProductDescription(lastSearch['%s'%selectedItem]['id'])
 
                     msg = 'Eu encontrei essas informações sobre o produto:\n%s\n%s\n%s\n\nVocês gostaria de adicionar este produto na sua lista de compras?'%(infoProduct['name'], infoProduct['description'], infoProduct['disponibility'])
 
