@@ -90,11 +90,6 @@ def readMsg(data):
 
     number = data["message"]["from"]
 
-    # if 'marco' in message:
-    #     sendMsg('teeeeeeeeest', number)
-
-    # if isClient(number):
-
     if database.isClient(number) == '[]':
         print('Cliente ainda não registrado, registrando...')
 
@@ -182,10 +177,6 @@ def readMsg(data):
                 
                 elif countInfo >= countLista:
                     
-                    # lastSearch = json.loads(checkLastSearch(number)[0][0])
-
-                    # print(lastSearch)
-
                     selectedItem = selectItemByNumber(message)
                     
                     if not selectedItem or selectedItem > len(lastSearch):
@@ -212,10 +203,6 @@ def readMsg(data):
                 # Valida se quer mais informação, outra consulta ou salvar na lista
 
             elif str(lastStatus) == '4':
-
-                # lastSearch = json.loads(checkLastSearch(number)[0][0])
-
-                # print(lastSearch)
 
                 selectedItem = selectItemByNumber(message)
 
