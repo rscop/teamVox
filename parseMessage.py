@@ -127,7 +127,7 @@ def readMsg(data):
             lastSearch = json.loads(database.checkLastSearch(number)[0][0])
             print('lastSearch: %s'% lastSearch)
 
-            lastItem = json.loads(database.checkLastItem(number)[0][0])
+            lastItem = json.loads(database.checkLastItem(number))
             print('lastItem: %s'% lastItem)
 
             if str(lastStatus) == '0' or str(lastStatus) == '2' or str(lastStatus) == '-1' :
