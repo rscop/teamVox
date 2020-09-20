@@ -222,13 +222,24 @@ def readMsg(data):
                     
                 else:
 
-                    insertOnList(number, lastSearch['%s'%selectedItem]['id'])
+                    selectedItem = selectItemByNumber(message)
+                    
+                    if not selectedItem or int(selectedItem) > len(lastSearch):
+                        msg = "Eu não consegui entender o item que você quer consultar, pode repetir o número dele pra mim, por favor?"
 
-                    msg = 'Inseri aqui pra você, ta bom? Gostaria de consultar mais algum produto?'
+                        sendMsg(msg, number)
 
-                    sendMsg(msg, number)
+                        database.insertHistory(number, msg, 5)
+                    
+                    else:
 
-                    database.insertHistory(number, msg, 11)
+                        insertOnList(number, lastSearch['%s'%selectedItem]['id'])
+
+                        msg = 'Inseri aqui pra você, ta bom? Gostaria de consultar mais algum produto?'
+
+                        sendMsg(msg, number)
+
+                        database.insertHistory(number, msg, 11)
 
 
             elif str(lastStatus) == '4':
@@ -251,6 +262,27 @@ def readMsg(data):
                         sendMsg(msg, number)
 
                         database.insertHistory(number, msg, 8)
+
+            elif str(lastStatus) == '5':
+
+                selectedItem = selectItemByNumber(message)
+                    
+                if not selectedItem or int(selectedItem) > len(lastSearch):
+                    msg = "Eu não consegui entender o item que você quer consultar, pode repetir o número dele pra mim, por favor?"
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, msg, 5)
+                
+                else:
+
+                    insertOnList(number, lastSearch['%s'%selectedItem]['id'])
+
+                    msg = 'Inseri aqui pra você, ta bom? Gostaria de consultar mais algum produto?'
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, msg, 11)
 
             elif str(lastStatus) == '8':
 
