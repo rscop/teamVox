@@ -1,5 +1,5 @@
 #!flask/bin/python
-from flask import Flask, abort, request, jsonify, g, url_for
+from flask import Flask, abort, request, jsonify, g, url_for, send_from_directory
 import sys
 import logging
 import logging.handlers
@@ -77,7 +77,18 @@ def receiveMsg():
 
     return(response)
 
+@app.route("/files")
+def list_files():
+    for filename in os.listdir(fileRepo):
+        path = os.path.join(fileRepo, filename)
+        if os.path.isfile(path):
+            files.append(filename)
+    return jsonify(files)
 
+@app.route("/files/<path:path>")
+def get_file(path):
+    return send_from_directory(fileRepo, path, as_attachment=True)
+    
 if __name__ == '__main__':
 
     config = get_ConfigFile(sys.argv[0]+'.cfg', 'production')
@@ -90,6 +101,11 @@ if __name__ == '__main__':
     ip = config['listen_ip']
 
     port = config['listen_port']
+
+    fileRepo = config['files_path']
+    if not os.páth.exists(fileRepo):
+        os.makedirs(fileRepo
+    logit('Audio Folders Configured')
 
     logit('Starting WS')
     app.run(host=ip, port=port, debug=False)

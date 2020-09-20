@@ -9,19 +9,51 @@ import sys
 import difflib
 import unidecode
 
-env = get_ConfigFile(sys.argv[0]+'.env', 'production')
+# env = get_ConfigFile(sys.argv[0]+'.env', 'production')
+env = get_ConfigFile('webservice.py'+'.env', 'production')
 
-def sendMsg(response, number):
+def textToSpeech(number, message):
+    url = 'https://zenvia-team27.herokuapp.com/text-to-speech'
+
+    payload = {
+        "text": "%s"%message
+    }
+
+    headers = {
+        'content-type': 'application/json'
+        }
+
+    r = requests.post(url, data=json.dumps(payload), headers=headers)
+
+    data = r.content
+
+    with open ('files/%stoSend.ogg'%number, 'wb') as d:
+        d.write(data)
+
+def sendMsg(response, number, isAudio=True):
 
     url = 'https://api.zenvia.com/v1/channels/whatsapp/messages'
 
+    textToSpeech(number, response)
+
+    if isAudio:
+        contents = {
+            'type': 'file',
+            'fileUrl': '%s/%stoSend.ogg'%(env['URL_FOR_FILE'], number),
+            'fileMimeType': 'audio/ogg'
+            }
+    else:
+        contents = {
+            'type': 'text',
+            'text': '%s'%response
+            }
+    
     payload = {
         "from": "%s"%env['SECURE_STRING'],
         "to": '%s'%number,
-        "contents": [{
-        'type': 'text',
-        'text': '%s'%response
-        }]
+        "contents": [
+            contents
+        ]
     }
 
     headers = {
@@ -35,6 +67,8 @@ def sendMsg(response, number):
     print(url, json.dumps(payload), (headers))
 
     return None
+
+print(sendMsg( 'testando A API', '5521999984171', True))
 
 def selectItemByNumber(msg):
 
