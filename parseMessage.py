@@ -82,11 +82,11 @@ def readMsg(data):
 
         if database.chatIsOpen(number):
             
-            print('chat is Open')
-            database.insertHistory(number, message, -1)
-
             lastStatus = database.checkLastStatus(number)[0][0]
             print(lastStatus)
+
+            database.insertHistory(number, message, -1)
+
             lastSearch = database.checkLastSearch(number)
             print(lastSearch)
 
@@ -100,10 +100,10 @@ def readMsg(data):
 
                 actualLista = search[1]
 
-                msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\n\
-                    Pode pedir informação sobre um produto informando também o número dele.\n\
-                    Para fazer fazer outra consulta é só me falar o nome de um outro produto.\n\
-                    Para salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos.encode(encoding="utf-8",errors="strict")
+                msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
+                    \nPode pedir informação sobre um produto informando também o número dele.\
+                    \nPara fazer fazer outra consulta é só me falar o nome de um outro produto.\
+                    \nPara salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos.encode(encoding="utf-8",errors="strict")
 
                 sendMsg(msg, number)
                 database.insertHistory(number, msg, 3)
@@ -120,8 +120,9 @@ def readMsg(data):
                     produto na lista adicionar na lista lista add adicionar adc'
 
                 countInfo = checkProximityString(message, infoWords)
-
+                print('countInfo: %s'%countInfo)
                 countLista = checkProximityString(message, infoLista)
+                print('countLista: %s'%countLista)
 
                 if countInfo < 3 and countLista < 3:
                     print('Entrou no count menor que 3')
@@ -132,43 +133,21 @@ def readMsg(data):
 
                     actualLista = search[1]
 
-                    msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\n\
-                        Pode pedir informação sobre um produto informando também o número dele.\n\
-                        Para fazer fazer outra consulta é só me falar o nome de um outro produto.\n\
-                        Para salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos
+                    msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
+                        \nPode pedir informação sobre um produto informando também o número dele.\
+                        \nPara fazer fazer outra consulta é só me falar o nome de um outro produto.\
+                        \nPara salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos
 
                     sendMsg(msg, number)
 
                     database.insertHistory(number, msg, 3)
                 
-                print('Nao entrou em nada')
-
                 # elif countInfo >= countLista:
                     #Informações sobre o produto
                 # else:
                     #Adicionar na lista
 
                 # Valida se quer mais informação, outra consulta ou salvar na lista
-
-            print('nada mesmo')
-
-
-            # database.insertHistory(number, message, -1)
-
-            # todo - Validações fluxograma
-            # if (is mostra lista atual)
-
-            # elifl (add to lista)
-
-            # elif (consulta lista)
-
-            # else:
-
-            # actualMsg = "Você já sabe a marca que gostaria de consultar?\nOu prefere ouvir as recomendações mesmo?"
-
-            # sendMsg(actualMsg, number)
-
-            # database.insertHistory(number, actualMsg)
 
             return None
 
