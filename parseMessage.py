@@ -3,6 +3,8 @@
 import json
 import requests
 from getConfigFile import get_ConfigFile
+import logging
+import logging.handlers
 import database
 import parser_paodeacucar
 import sys
