@@ -106,7 +106,7 @@ def checkLastSearch(number):
 
     checkSearch = fetchData(query)
 
-    if str(checkSearch) == '[]':
+    if str(checkSearch) == '[]' or str(checkSearch) == '{}' or len(checkSearch) == 0:
 
         return {}
 
