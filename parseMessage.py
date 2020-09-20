@@ -32,6 +32,22 @@ def sendMsg(response, number):
 
     return None
 
+def selectItemByNumber(msg, list):
+
+    words = msg.encode(encoding="utf-8",errors="strict")
+
+    validationArray = ['um dois três tres quatro cinco seis sete oito nove dez'].encode(encoding="utf-8",errors="strict")
+
+    validationArray = validationArray.split()
+
+    for d in words:
+
+        if str(difflib.get_close_matches(d,validationArray)) != '[]':
+            
+            return str(difflib.get_close_matches(d,validationArray))
+
+    return False
+
 def checkProximityString(msg, listWords):
 
     words = listWords.encode(encoding="utf-8",errors="strict")
@@ -85,12 +101,12 @@ def readMsg(data):
         if database.chatIsOpen(number):
             
             lastStatus = database.checkLastStatus(number)[0][0]
-            print(lastStatus)
+            print('lastStatus: %s'%lastStatus)
 
             database.insertHistory(number, message, -1)
 
             lastSearch = database.checkLastSearch(number)
-            print(lastSearch)
+            print('lastSearch: %s'% lastSearch)
 
             if str(lastStatus) == '0' or str(lastStatus) == '2' or str(lastStatus) == '-1' :
                 print('Status 0 2 ou -1')
@@ -148,12 +164,45 @@ def readMsg(data):
 
                     database.insertHistory(number, msg, 3)
                 
-                # elif countInfo >= countLista:
+                elif countInfo >= countLista:
+                    
+                    # lastSearch = json.loads(checkLastSearch(number)[0][0])
+
+                    # print(lastSearch)
+
+                    selectedItem = selectItemByNumber(message, lastSearch)
+
+                    print('selectedItem: %s'%selectedItem)
+
+                    if not selectedItem:
+                        msg = "Eu não consegui entender o item que você quer consultar, pode repetir o número dele pra mim, por favor?"
+
+                        sendMsg(msg, number)
+
+                        database.insertHistory(number, msg, 4)
+
                     
                 # else:
                     #Adicionar na lista
 
                 # Valida se quer mais informação, outra consulta ou salvar na lista
+
+            elif str(lastStatus) == '4':
+
+                # lastSearch = json.loads(checkLastSearch(number)[0][0])
+
+                # print(lastSearch)
+
+                selectedItem = selectItemByNumber(message, lastSearch)
+
+                print('selectedItem: %s'%selectedItem)
+
+                if not selectedItem:
+                    msg = "Eu não consegui entender o item que você quer consultar, pode repetir o número dele pra mim, por favor?"
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, msg, 4)
 
             return None
 
