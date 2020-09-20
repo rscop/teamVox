@@ -32,19 +32,33 @@ def sendMsg(response, number):
 
     return None
 
-def selectItemByNumber(msg, list):
+def selectItemByNumber(msg):
 
-    words = msg.encode(encoding="utf-8",errors="strict")
+    words = msg.split()
 
-    validationArray = 'um dois três tres quatro cinco seis sete oito nove dez'.encode(encoding="utf-8",errors="strict")
+    validationArray = 'um dois três tres quatro cinco seis sete oito nove dez'
 
     validationArray = validationArray.split()
 
     for d in words:
 
-        if str(difflib.get_close_matches(d,validationArray)) != '[]':
+        if d in validationArray:
             
-            return str(difflib.get_close_matches(d,validationArray))
+            response = {
+            'um': "1",
+            'dois': "2",
+            'três' "3",
+            'tres': "3",
+            'quatro': "4",
+            'cinco': "5",
+            'seis': "6",
+            'sete': "7",
+            'oito': "8",
+            'nove': "9",
+            'dez': "10"
+            }
+            
+            return response[d]
 
     return False
 
@@ -173,6 +187,14 @@ def readMsg(data):
                     selectedItem = selectItemByNumber(message, lastSearch)
 
                     print('selectedItem: %s'%selectedItem)
+
+                    infoProduct = parser_paodeacucar.getProductDescription(lastSearch['%s'%selectedItem])
+
+                    msg = 'Eu encontrei essas informações sobre o produto:\n%s\n%s\n%s\n\nVocês gostaria de adicionar este produto na sua lista de compras?'%(infoProduct['name'], infoProduct['description'], infoProduct['disponibility'])
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, msg, 8)
 
                     if not selectedItem:
                         msg = "Eu não consegui entender o item que você quer consultar, pode repetir o número dele pra mim, por favor?"

@@ -16,10 +16,17 @@ def getProductDescription(product_id):
 
     response = dict()
 
+    response["name"] = product["content"]["name"]
+
+    # response["content"]["itemMap"][0]["reference"]["currentPrice"]
+
     try:
         description = 'sua descrição é ' + product["content"]["shortDescription"]
     except:
-        description = 'não apresenta descrição'
+        try:
+            description = response["content"]["itemMap"][0]["reference"]["shortDescription"].replace('\n', '').strip()
+        except:
+            description = 'não apresenta descrição'
 
     if (product["content"]["stock"]).encode('utf-8').strip().lower() == 'true':
         disponibility = "em estoque"
@@ -30,7 +37,6 @@ def getProductDescription(product_id):
     response["disponibility"] = disponibility
 
     return response
-
 
 def searchProduct(product):
 
