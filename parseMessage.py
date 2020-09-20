@@ -45,7 +45,7 @@ setuplog(config['logfile'],config['logfile_backup_count'],config['log_level'])
 
 def textToSpeech(number, message):
 
-    logit('text to speech message: %s'%message)
+    # logit('text to speech message: %s'%message)
     url = 'https://zenvia-team27.herokuapp.com/text-to-speech'
 
     payload = {
@@ -292,7 +292,7 @@ def readMsg(data):
                         \nPara salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos.encode(encoding="utf-8",errors="strict")
 
                     actualLista = json.dumps(search[1])
-                    
+
                     database.insertSearch(number, actualLista)
 
                     sendMsg(msg, number)
