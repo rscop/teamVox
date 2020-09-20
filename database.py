@@ -66,7 +66,7 @@ def insertHistory(number, msg, msg_id):
     prequery = "select id from chat where cel_number = %s and end_date is null"%number
     chat_id = fetchData(prequery)[0][0]
 
-    query = "insert into msg_history (chat_id, origin, destination, reg_date, msg) values ('%s', '%s', '%s', '%s', '%s')"%(chat_id, '0', '0', timestamp, msg, msg_id)
+    query = "insert into msg_history (chat_id, origin, destination, reg_date, msg) values ('%s', '%s', '%s', '%s', '%s', '%s')"%(chat_id, '0', '0', timestamp, msg, msg_id)
     insertData(query)
 
     return None
