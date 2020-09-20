@@ -1,6 +1,7 @@
 # [Team Vox!](https://igorjosemaule.wixsite.com/zenviavox)
 ![Vox_logo-cor.png](https://static.wixstatic.com/media/a41da5_072e57945e2346579e6bbdb37994f8e3~mv2.png/v1/fill/w_226,h_99,al_c,q_85,usm_0.66_1.00_0.01/Vox_logo-cor.webp)
 ![vox_tagline.png](https://static.wixstatic.com/media/a41da5_002ab44972b847768b1c0eaa07ce8a80~mv2.png/v1/fill/w_600,h_20,al_c,q_85,usm_0.66_1.00_0.01/vox_tagline.webp)
+
 A VOX é uma startup social com o propósito de garantir experiências de compras positivas para todas as pessoas, independente de suas individualidades.
 
 Contamos com o apoio de tecnologias e inovação para facilitar a jornada de compra de deficientes visuais. Acreditamos que podemos fazer a diferença.
