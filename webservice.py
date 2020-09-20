@@ -103,8 +103,9 @@ if __name__ == '__main__':
     port = config['listen_port']
 
     fileRepo = config['files_path']
-    if not os.páth.exists(fileRepo):
-        os.makedirs(fileRepo
+    if not os.path.exists(fileRepo):
+        os.makedirs(fileRepo)
+
     logit('Audio Folders Configured')
 
     logit('Starting WS')
