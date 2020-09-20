@@ -81,14 +81,17 @@ def readMsg(data):
     else:
 
         if database.chatIsOpen(number):
-
+            
+            print('chat is Open')
             database.insertHistory(number, message, -1)
 
             lastStatus = database.checkLastStatus(number)[0][0]
-
+            print(lastStatus)
             lastSearch = database.checkLastSearch(number)
+            print(lastSearch)
 
-            if str(lastStatus) == '0' or str(lastStatus) == '2':
+            if str(lastStatus) == '0' or str(lastStatus) == '2' or str(lastStatus) == '-1' :
+                print('Status 0 2 ou -1')
                 # todo Lista de Produtos
 
                 search = parser_paodeacucar.searchProduct(message)
@@ -106,6 +109,7 @@ def readMsg(data):
                 database.insertHistory(number, msg, 3)
 
             elif str(lastStatus) == '3':
+                print('Status 3')
 
                 infoWords = 'eu gostaria de mais informações sobre o produto eu quero mais informações sobre o a\
                     informação do produto informação sobre eu quero informação do info mais infos quero saber sobre o\
@@ -120,6 +124,7 @@ def readMsg(data):
                 countLista = checkProximityString(message, infoLista)
 
                 if countInfo < 3 and countLista < 3:
+                    print('Entrou no count menor que 3')
 
                     search = parser_paodeacucar.searchProduct(message)
 
@@ -135,6 +140,8 @@ def readMsg(data):
                     sendMsg(msg)
 
                     database.insertHistory(number, msg, 3)
+                
+                print('Nao entrou em nada')
 
                 # elif countInfo >= countLista:
                     #Informações sobre o produto
@@ -143,8 +150,10 @@ def readMsg(data):
 
                 # Valida se quer mais informação, outra consulta ou salvar na lista
 
+            print('nada mesmo')
 
-            database.insertHistory(number, message, -1)
+
+            # database.insertHistory(number, message, -1)
 
             # todo - Validações fluxograma
             # if (is mostra lista atual)
@@ -155,9 +164,9 @@ def readMsg(data):
 
             # else:
 
-            actualMsg = "Você já sabe a marca que gostaria de consultar?\nOu prefere ouvir as recomendações mesmo?"
+            # actualMsg = "Você já sabe a marca que gostaria de consultar?\nOu prefere ouvir as recomendações mesmo?"
 
-            sendMsg(actualMsg, number)
+            # sendMsg(actualMsg, number)
 
             # database.insertHistory(number, actualMsg)
 

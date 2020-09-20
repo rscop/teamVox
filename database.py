@@ -91,7 +91,7 @@ def checkLastStatus(number):
 
 def checkLastSearch(number):
 
-    query = "select * from lastSearch where cel_number = %s"%number
+    query = "select result from lastSearch where cel_number = %s"%number
 
     checkSearch = fetchData(query)
 
