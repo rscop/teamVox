@@ -133,7 +133,7 @@ def readMsg(data):
 
                 listaProdutos = search[0]
 
-                actualLista = search[1]
+                actualLista = json.dumps(search[1])
 
                 database.insertSearch(number, actualLista)
 
@@ -168,7 +168,7 @@ def readMsg(data):
 
                     listaProdutos = search[0]
 
-                    actualLista = search[1]
+                    actualLista = json.dumps(search[1])
 
                     database.insertSearch(number, actualLista)
 
