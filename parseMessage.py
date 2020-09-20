@@ -84,9 +84,15 @@ def checkProximityString(msg, listWords):
 
 def insertOnList(number, lastitem):
 
-    product = parser_paodeacucar.searchProduct(lastitem)[0]
+    search = parser_paodeacucar.searchProduct(lastitem)
 
-    database.insertSearchItem(number, product)
+    product = dict()
+
+    for d in search[1]:
+        product['Name'] = search[1][d]['Name']
+        product['Price'] = search[1][d]['Price']
+
+    database.insertOnList(number, product)
 
     return None
 
@@ -214,10 +220,16 @@ def readMsg(data):
                         database.insertHistory(number, msg, 8)
 
                     
-                # else:
-                    #Adicionar na lista
+                else:
 
-                # Valida se quer mais informação, outra consulta ou salvar na lista
+                    insertOnList(number, lastItem)
+
+                    msg = 'Inseri aqui pra você, ta bom? Gostaria de consultar mais algum produto?'
+
+                    sendMsg(msg, number)
+
+                    database.insertHistory(number, msg, 11)
+
 
             elif str(lastStatus) == '4':
 

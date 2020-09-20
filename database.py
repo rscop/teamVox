@@ -121,6 +121,18 @@ def checkProductsList(number):
 
         return result
 
+def insertOnList(number, product):
+
+    prequery = "select id from chat where cel_number = %s and end_date is null"%number
+
+    chat_id = fetchData(prequery)[0][0]
+    
+    query = "insert into client_product_list (chat_id, product) values ('%s', '%s - %s reais')"%(chat_id, product["Name"], product["Price"])
+
+    insertData(query)
+
+    return None
+
 def checkLastItem(number):
 
     query = "select item from lastSearch where cel_number = %s"%number

@@ -6,11 +6,7 @@ import sys
 
 def getProductDescription(product_id):
 
-    print('Product_id: %s'%product_id)
-
     url = 'https://api.gpa.digital/pa/v3/products/ecom/%s'%product_id
-
-    print('url: %s'%url)
 
     payload = {'storeId': '501'}
 
@@ -19,8 +15,6 @@ def getProductDescription(product_id):
     product = r.json()
 
     response = dict()
-
-    print(product)
 
     response["name"] = product["content"]["name"]
 
@@ -44,8 +38,6 @@ def getProductDescription(product_id):
     response["disponibility"] = disponibility
 
     return response
-
-print(getProductDescription(434343))
 
 def searchProduct(product):
 
@@ -88,7 +80,7 @@ def searchProduct(product):
 
             msg+='%s. %s que custa %s reais.\n'%(count, title, price)
 
-            productsList['%s'%count] = {"Name": title, "id": productId}
+            productsList['%s'%count] = {"Name": title, "id": productId, "Price": price}
 
             count += 1
 
