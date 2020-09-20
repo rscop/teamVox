@@ -88,7 +88,7 @@ def searchProduct(product):
 
             msg+='%s. %s que custa %s reais.\n'%(count, title, price)
 
-            productsList['%s'%count] = {"Name": title, "Id": productId}
+            productsList['%s'%count] = {"Name": title, "id": productId}
 
             count += 1
 
