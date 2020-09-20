@@ -67,6 +67,8 @@ def audioToText(file):
 
 def isAudioReceived(data):
 
+    print('is audio=====================')
+    print(data)
     msgtype = data["message"]["contents"][1]["type"]
 
     msgMimeType = data["message"]["contents"][1]["fileMimeType"]
