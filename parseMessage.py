@@ -218,13 +218,17 @@ def readMsg(data):
 
         if database.chatIsOpen(number):
             logit('Cliente já possui um chat aberto')
-            
+
             lastStatus = database.checkLastStatus(number)[0][0]
             logit('lastStatus: %s'%lastStatus)
 
             database.insertHistory(number, message, -1)
 
-            lastSearch = json.loads(database.checkLastSearch(number)[0][0])
+            try:
+                lastSearch = json.loads(database.checkLastSearch(number)[0][0])
+            except:
+                lastSearch = {}
+
             logit('lastSearch: %s'% lastSearch)
 
             try:
