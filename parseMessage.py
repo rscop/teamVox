@@ -159,7 +159,7 @@ def readMsg(data):
 
             sendMsg(actualMsg, number)
 
-            database.insertHistory(number, actualMsg)
+            # database.insertHistory(number, actualMsg)
 
             return None
 
@@ -173,7 +173,7 @@ def readMsg(data):
 
             sendMsg(actualMsg, number, 2)
 
-            database.insertHistory(number, actualMsg)
+            database.insertHistory(number, actualMsg, 0)
 
             return None
 
