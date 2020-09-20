@@ -187,7 +187,7 @@ def readMsg(data):
 
                     # print(lastSearch)
 
-                    selectedItem = selectItemByNumber(message, lastSearch)
+                    selectedItem = selectItemByNumber(message)
 
                     print('selectedItem: %s'%selectedItem)
 
@@ -218,7 +218,7 @@ def readMsg(data):
 
                 # print(lastSearch)
 
-                selectedItem = selectItemByNumber(message, lastSearch)
+                selectedItem = selectItemByNumber(message)
 
                 print('selectedItem: %s'%selectedItem)
 
