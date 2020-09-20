@@ -209,14 +209,17 @@ def readMsg(data):
 
                 listaProdutos = search[0]
 
-                actualLista = json.dumps(search[1])
-
-                database.insertSearch(number, actualLista)
-
-                msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
+                if listaProdutos.split(',')[0] == 'Poxa'
+                    msg = listaProdutos.encode(encoding="utf-8",errors="strict")
+                else:
+                    msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
                     \nPode pedir informação sobre um produto informando também o número dele.\
                     \nPara fazer fazer outra consulta é só me falar o nome de um outro produto.\
                     \nPara salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos.encode(encoding="utf-8",errors="strict")
+
+                actualLista = json.dumps(search[1])
+
+                database.insertSearch(number, actualLista)
 
                 sendMsg(msg, number)
                 database.insertHistory(number, msg, 3)
@@ -244,21 +247,24 @@ def readMsg(data):
 
                     listaProdutos = search[0]
 
-                    actualLista = json.dumps(search[1])
-
-                    database.insertSearch(number, actualLista)
-
-                    msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
+                    if listaProdutos.split(',')[0] == 'Poxa'
+                        msg = listaProdutos.encode(encoding="utf-8",errors="strict")
+                    else:
+                        msg = "Essa foi a lista de produtos que eu encontrei:\n%s\nO que você gostaria de fazer agora?\
                         \nPode pedir informação sobre um produto informando também o número dele.\
                         \nPara fazer fazer outra consulta é só me falar o nome de um outro produto.\
                         \nPara salvar ele em sua lista basta falar que quer adicionar o produto e o número dele."%listaProdutos.encode(encoding="utf-8",errors="strict")
 
+                    actualLista = json.dumps(search[1])
+
+                    database.insertSearch(number, actualLista)
+
                     sendMsg(msg, number)
 
                     database.insertHistory(number, msg, 3)
-                
+
                 elif countInfo >= countLista:
-                    
+
                     selectedItem = selectItemByNumber(message)
                     
                     if not selectedItem or int(selectedItem) > len(lastSearch):
