@@ -48,6 +48,7 @@ def logit(m):
     gtwlogger.debug(m)
 
 def audioToText(file):
+    print('audioToText')
 
     url = 'https://zenvia-team27.herokuapp.com/speech-to-text'
 
@@ -63,7 +64,10 @@ def audioToText(file):
 
     data = r.content
 
-    return data
+    print(data)
+    print(data['transcription'])
+
+    return data['transcription']
 
 def isAudioReceived(data):
 
@@ -100,15 +104,15 @@ def receiveMsg():
 
     # print(data)
 
-    # audio = isAudioReceived(data)
+    audio = isAudioReceived(data)
 
-    # if audio:
+    if audio:
 
-        # message = audio
+        message = audio
 
-    # else:
+    else:
 
-    message = data["message"]["contents"][1]["text"]
+        message = data["message"]["contents"][1]["text"]
 
     name = data["message"]["visitor"]["name"]
 
