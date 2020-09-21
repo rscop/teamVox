@@ -62,7 +62,7 @@ def audioToText(file):
 
     r = requests.post(url, data=json.dumps(payload), headers=headers)
 
-    data = r.content
+    data = json.loads(r.content)
 
     print(data)
     print(data['transcription'])
