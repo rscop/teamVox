@@ -59,10 +59,10 @@ def textToSpeech(number, message):
 
     data = r.content
 
-    if os.path.exists('files/%stoSend..ogg'%number):
-        os.remove('files/%stoSend..ogg'%number)
+    if os.path.exists('files/%stoSend.ogg'%number):
+        os.remove('files/%stoSend.ogg'%number)
 
-    with open ('files/%stoSend..ogg'%number, 'wb') as d:
+    with open ('files/%stoSend.ogg'%number, 'wb') as d:
         d.write(data)
 
 def sendMsg(response, number, isAudio=True):
@@ -74,7 +74,7 @@ def sendMsg(response, number, isAudio=True):
     if isAudio:
         contents = {
             'type': 'file',
-            'fileUrl': '%s/%stoSend..ogg'%(env['URL_FOR_FILE'], number),
+            'fileUrl': '%s/%stoSend.ogg'%(env['URL_FOR_FILE'], number),
             'fileMimeType': 'audio/ogg'
             }
     else:
