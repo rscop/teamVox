@@ -511,7 +511,7 @@ def readMsg(data):
 
                 else:
 
-                    msg = 'Poxa, sinto muito por não ter conseguido encontrar tudo o que você precisava. Estou melhorando a cada dia mais ainda é difícil pra mim\
+                    msg = 'Poxa, sinto muito por não ter conseguido encontrar tudo o que você precisava. Estou melhorando a cada dia, mas ainda é difícil pra mim\
                         \nSerá que você tem alguma dica pra me dar de como eu posso melhorar o meu entendimento dos humanos?\
                         \nEu vou ficar muito feliz em conseguir te ajudar melhor da próxima vez :)\
                         \nTenha um ótimo dia'
