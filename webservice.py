@@ -76,7 +76,7 @@ def isAudioReceived(data):
         data = audioToText(data["message"]["contents"][1]["fileUrl"])
 
         return data
-    
+
     else:
 
         return False
@@ -97,6 +97,8 @@ def get():
 def receiveMsg():
 
     data = json.loads(request.data)
+
+    print(data)
 
     # audio = isAudioReceived(data)
 
