@@ -102,28 +102,32 @@ def get():
 @app.route('/receiveMsg', methods=['POST'])
 def receiveMsg():
 
-    data = json.loads(request.data)
+    try:
+        data = json.loads(request.data)
 
-    # print(data)
+        # print(data)
 
-    audio = isAudioReceived(data)
+        audio = isAudioReceived(data)
 
-    if audio:
+        if audio:
 
-        message = audio
+            message = audio
 
-    # else:
+        else:
 
-    #     message = data["message"]["contents"][1]["text"]
+            message = data["message"]["contents"][1]["text"]
 
-    name = data["message"]["visitor"]["name"]
+        name = data["message"]["visitor"]["name"]
 
-    number = data["message"]["from"]
+        number = data["message"]["from"]
 
-    logit('%s [%s]: %s'%((name).encode('utf-8').strip(), (number).encode('utf-8').strip(), (message).encode('utf-8').strip()))
+        logit('%s [%s]: %s'%((name).encode('utf-8').strip(), (number).encode('utf-8').strip(), (message).encode('utf-8').strip()))
 
-    # readMsg(data, message)
-
+        readMsg(data, message)
+    
+    except:
+        pass
+    
     response = '{"status": "Ok"}'
 
     return(response)
