@@ -74,7 +74,7 @@ def isAudioReceived(data):
     msgtype = data["message"]["contents"][1]["type"]
 
     try:
-        
+
         msgMimeType = data["message"]["contents"][1]["fileMimeType"]
 
         if msgtype == 'file' and msgMimeType == 'audio/ogg; codecs=opus':
@@ -82,8 +82,6 @@ def isAudioReceived(data):
             data = audioToText(data["message"]["contents"][1]["fileUrl"])
 
             return data
-
-        else:
 
     except:
 
