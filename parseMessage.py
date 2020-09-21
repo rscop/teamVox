@@ -44,7 +44,7 @@ setuplog(config['logfile'],config['logfile_backup_count'],config['log_level'])
 
 def textToSpeech(number, message):
 
-    # logit('text to speech message: %s'%message)
+    logit('text to speech message: %s'%message)
     url = 'https://zenvia-team27.herokuapp.com/text-to-speech'
 
     payload = {
