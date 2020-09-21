@@ -106,9 +106,9 @@ def checkLastSearch(number):
 
     checkSearch = fetchData(query)
 
-    print('checkLastSearch')
+    # print('checkLastSearch')
 
-    print(checkSearch)
+    # print(checkSearch)
 
     if str(checkSearch) == '[]' or str(checkSearch) == '{}' or len(checkSearch) == 0:
 
@@ -163,8 +163,8 @@ def checkLastItem(number):
         return checkSearch[0][0]
 
 def insertSearch(number, msg):
-    print('Insert Search')
-    print('number: %s \nMessage: %s')%(number, msg)
+    # print('Insert Search')
+    # print('number: %s \nMessage: %s')%(number, msg)
 
     dataExist = checkLastSearch(number)
 

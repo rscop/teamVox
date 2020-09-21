@@ -69,19 +69,19 @@ def sendMsg(response, number, isAudio=True):
 
     url = 'https://api.zenvia.com/v1/channels/whatsapp/messages'
 
-    textToSpeech(number, response)
+    # textToSpeech(number, response)
 
-    if isAudio:
-        contents = {
-            'type': 'file',
-            'fileUrl': '%s/%stoSend.bin'%(env['URL_FOR_FILE'], number),
-            'fileMimeType': 'audio/ogg'
-            }
-    else:
-        contents = {
-            'type': 'text',
-            'text': '%s'%response
-            }
+    # if isAudio:
+    #     contents = {
+    #         'type': 'file',
+    #         'fileUrl': '%s/%stoSend.bin'%(env['URL_FOR_FILE'], number),
+    #         'fileMimeType': 'audio/ogg'
+    #         }
+    # else:
+    contents = {
+        'type': 'text',
+        'text': '%s'%response
+        }
     
     payload = {
         "from": "%s"%env['SECURE_STRING'],

@@ -98,7 +98,7 @@ def receiveMsg():
 
     data = json.loads(request.data)
 
-    print(data)
+    # print(data)
 
     # audio = isAudioReceived(data)
 
