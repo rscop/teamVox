@@ -112,9 +112,9 @@ def receiveMsg():
 
         message = audio
 
-    else:
+    # else:
 
-        message = data["message"]["contents"][1]["text"]
+    #     message = data["message"]["contents"][1]["text"]
 
     name = data["message"]["visitor"]["name"]
 
@@ -122,7 +122,7 @@ def receiveMsg():
 
     logit('%s [%s]: %s'%((name).encode('utf-8').strip(), (number).encode('utf-8').strip(), (message).encode('utf-8').strip()))
 
-    readMsg(data, message)
+    # readMsg(data, message)
 
     response = '{"status": "Ok"}'
 
