@@ -71,18 +71,18 @@ def sendMsg(response, number, isAudio=True):
 
     textToSpeech(number, response)
 
-    if isAudio:
-        contents = {
-            'type': 'file',
-            'fileUrl': '%s/%stoSend.ogg'%(env['URL_FOR_FILE'], number),
-            'fileMimeType': 'audio/ogg'
-            }
-    else:
-        contents = {
-            'type': 'text',
-            'text': '%s'%response
-            }
-    
+    # if isAudio:
+    #     contents = {
+    #         'type': 'file',
+    #         'fileUrl': '%s/%stoSend.ogg'%(env['URL_FOR_FILE'], number),
+    #         'fileMimeType': 'audio/ogg'
+    #         }
+    # else:
+    contents = {
+        'type': 'text',
+        'text': '%s'%response
+        }
+
     payload = {
         "from": "%s"%env['SECURE_STRING'],
         "to": '%s'%number,
