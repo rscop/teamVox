@@ -142,7 +142,7 @@ def insertOnList(number, product):
 
     chat_id = fetchData(prequery)[0][0]
     
-    query = "insert into client_product_list (chat_id, product) values ('%s', '%s - %s reais')"%(chat_id, product["Name"], product["Price"])
+    query = "insert into client_product_list (chat_id, product) values ('%s', '%s - %s reais e %s centavos')"%(chat_id, product["Name"], product["Price"].split(',')[0],  product["Price"].split(',')[1])
 
     insertData(query)
 
