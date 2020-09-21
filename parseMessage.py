@@ -478,7 +478,7 @@ def readMsg(data):
 
                     actualList = getProductsList(number)
 
-                    msg = 'Aqui está sua lista de hoje:\n\n %s\nConseguiu encontrar tudo que você estava precisando?'
+                    msg = 'Aqui está sua lista de hoje:\n\n %s\nConseguiu encontrar tudo que você estava precisando?'%actualList
 
                     sendMsg(msg, number)
 
