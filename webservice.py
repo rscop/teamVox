@@ -122,7 +122,7 @@ def receiveMsg():
 
     logit('%s [%s]: %s'%((name).encode('utf-8').strip(), (number).encode('utf-8').strip(), (message).encode('utf-8').strip()))
 
-    readMsg(data)
+    readMsg(data, message)
 
     response = '{"status": "Ok"}'
 

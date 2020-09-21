@@ -188,9 +188,9 @@ def endOldChat(number):
     else:
         return True
 
-def readMsg(data):
+def readMsg(data, message):
 
-    message = data["message"]["contents"][1]["text"].lower()
+    # message = data["message"]["contents"][1]["text"].lower()
 
     name = data["message"]["visitor"]["name"]
 
