@@ -59,29 +59,29 @@ def textToSpeech(number, message):
 
     data = r.content
 
-    if os.path.exists('files/%stoSend.bin'%number):
-        os.remove('files/%stoSend.bin'%number)
+    if os.path.exists('files/%stoSend.ogg'%number):
+        os.remove('files/%stoSend.ogg'%number)
 
-    with open ('files/%stoSend.bin'%number, 'wb') as d:
+    with open ('files/%stoSend.ogg'%number, 'wb') as d:
         d.write(data)
 
 def sendMsg(response, number, isAudio=True):
 
     url = 'https://api.zenvia.com/v1/channels/whatsapp/messages'
 
-    # textToSpeech(number, response)
+    textToSpeech(number, response)
 
-    # if isAudio:
-    #     contents = {
-    #         'type': 'file',
-    #         'fileUrl': '%s/%stoSend.bin'%(env['URL_FOR_FILE'], number),
-    #         'fileMimeType': 'audio/ogg'
-    #         }
-    # else:
-    contents = {
-        'type': 'text',
-        'text': '%s'%response
-        }
+    if isAudio:
+        contents = {
+            'type': 'file',
+            'fileUrl': '%s/%stoSend.ogg'%(env['URL_FOR_FILE'], number),
+            'fileMimeType': 'audio/ogg'
+            }
+    else:
+        contents = {
+            'type': 'text',
+            'text': '%s'%response
+            }
     
     payload = {
         "from": "%s"%env['SECURE_STRING'],
